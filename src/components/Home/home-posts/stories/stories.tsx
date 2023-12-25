@@ -14,7 +14,6 @@ const Stories = () => {
       const next = lastElement - 4;
       setFirstElement(previous);
       setLastElement(next);
-      console.log(firstElement);
     }
   };
 
@@ -24,7 +23,6 @@ const Stories = () => {
       const next = lastElement + 4;
       setFirstElement(previous);
       setLastElement(next);
-      console.log(lastElement);
     }
   };
 
@@ -94,7 +92,10 @@ const Stories = () => {
                 key={index}
                 nodeRef={ref}
               >
-                <div className="story-others flex flex-col items-center overflow-hidden">
+                <div
+                  className="story-others flex flex-col items-center overflow-hidden"
+                  ref={ref}
+                >
                   <div className="brightness"></div>
                   <div className="story-image-page z-20">
                     <img src={story.img} alt="Image" />
