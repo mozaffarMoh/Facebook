@@ -5,7 +5,7 @@ import { postsArray } from "./postsArray";
 import { ThreeDots, XLg } from "react-bootstrap-icons";
 
 const HomePosts = () => {
-  const { isScreen666 } = MediaQuery();
+  const { isScreen555, isScreen666 } = MediaQuery();
   const createPostNavigation = [
     {
       img: "https://static.xx.fbcdn.net/rsrc.php/v3/yr/r/c0dWho49-X3.png",
@@ -23,7 +23,7 @@ const HomePosts = () => {
   isScreen666 && createPostNavigation.pop();
 
   return (
-    <div className="posts-section pb-5">
+    <div className={`posts-section pb-5 ${isScreen666 && "w-full"}`}>
       {/* Create Post */}
       <div className="create-post">
         <div className="create-post-first">
@@ -37,7 +37,9 @@ const HomePosts = () => {
           {createPostNavigation.map((item, index) => {
             return (
               <div
-                className="create-post-second-item hover:cursor-pointer hover:bg-slate-200"
+                className={`${
+                  isScreen666 && "w-full"
+                } create-post-second-item hover:cursor-pointer hover:bg-slate-200`}
                 key={index}
               >
                 <img height="24" width="24" alt="" src={item.img} />
@@ -69,7 +71,9 @@ const HomePosts = () => {
               </div>
 
               {/* Content */}
-              <div className="post-text p-5">{post.text}</div>
+              <div className={`post-text p-5 ${isScreen555 && "text-sm"}`}>
+                {post.text}
+              </div>
 
               {/* Media */}
               <div className="post-media w-100 flex ">
@@ -138,7 +142,7 @@ const HomePosts = () => {
                   <input
                     type="text"
                     placeholder="Write a public comment..."
-                    className="font-thin"
+                    className={`font-thin ${isScreen555 && "text-sm"}`}
                   />
                   <div className="comments-input-icons">
                     <i

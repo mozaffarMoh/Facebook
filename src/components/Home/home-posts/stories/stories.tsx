@@ -2,8 +2,10 @@ import "./stories.scss";
 import React from "react";
 import { contactsArray } from "../../home-contacts/contactsArray";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { MediaQuery } from "../../../MediaQuery";
 
 const Stories = () => {
+  const { isScreen555 } = MediaQuery();
   const [firstElement, setFirstElement] = React.useState(0);
   const [lastElement, setLastElement] = React.useState(3);
   const ref = React.useRef(null);
@@ -30,7 +32,7 @@ const Stories = () => {
     <div className="stories">
       {firstElement !== 0 && (
         <div
-          className="arrow-circle arrow-left"
+          className={`arrow-circle arrow-left ${isScreen555 && "left-4 "}`}
           onClick={handlePreviousElement}
         >
           <svg viewBox="0 0 24 24" width="24" height="24" fill="black">
@@ -39,7 +41,10 @@ const Stories = () => {
         </div>
       )}
       {lastElement < contactsArray.length && (
-        <div className="arrow-circle arrow-right" onClick={handleNextElement}>
+        <div
+          className={`arrow-circle arrow-right ${isScreen555 && "right-4 "}`}
+          onClick={handleNextElement}
+        >
           <svg viewBox="0 0 24 24" width="24" height="24" fill="black">
             <path d="M9.209 5.207 16 12l-6.791 6.793a1 1 0 1 0 1.415 1.414l7.5-7.5a1 1 0 0 0 0-1.414l-7.5-7.5a1 1 0 1 0-1.415 1.414z"></path>
           </svg>
@@ -86,7 +91,7 @@ const Stories = () => {
             return (
               <CSSTransition
                 in={true}
-                timeout={600}
+                timeout={1000}
                 classNames="fade"
                 unmountOnExit
                 key={index}
