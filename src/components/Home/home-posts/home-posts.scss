@@ -1,0 +1,152 @@
+.posts-section,
+.create-post,
+.create-post-first,
+.create-post-second,
+.create-post-second-item,
+.posts,
+.post,
+.post-header,
+.post-media,
+.reactions-comments,
+.comments-input-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.posts-section {
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 70% !important;
+    height: 93%;
+    margin-top: 20px;
+    border-radius: 15px;
+}
+
+.create-post {
+    flex-direction: column;
+    height: 150px;
+    border-radius: 15px;
+    background-color: white;
+}
+
+.create-post-first,
+.reactions-comments {
+    width: 100%;
+    height: 100px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.create-post-first input,
+.reactions-comments input {
+    width: 90%;
+    height: 40px;
+    border-radius: 20px;
+    margin-left: 10px;
+    background-color: aliceblue;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.create-post-first input:hover,
+.reactions-comments input:hover {
+    background-color: rgb(223, 231, 238);
+}
+
+.create-post-second {
+    height: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
+    justify-content: space-around;
+    font-weight: 800;
+    color: grey;
+}
+
+.create-post-second-item {
+    width: 33%;
+    height: 50px;
+    border-radius: 10px;
+}
+
+.posts {
+    flex-direction: column;
+    margin-top: 20px;
+    border-radius: 15px;
+    background-color: transparent;
+}
+
+.post {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    height: fit-content;
+    max-height: 1000px;
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+
+.post-header img {
+    width: 43px;
+    height: 43px;
+    border-radius: 50px;
+    margin-right: 10px;
+}
+
+.post-header h2 {
+    font-weight: 800;
+    font-size: 14px;
+}
+
+.post-header p {
+    font-weight: 800;
+    font-size: 10px;
+    color: grey;
+}
+
+.post-media {
+    width: 100%;
+}
+
+.post-media img,
+.post-media video {
+    width: 100%;
+    height: 600px;
+}
+
+.reactions-felling-icons img {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.reactions-icon {
+    background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yc/r/80qnFRz90vM.png);
+    background-size: auto;
+    width: 17px;
+    height: 17px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.reactions-buttons .reactions-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.reactions-comments {
+    position: relative;
+}
+
+.reactions-comments .comments-input-icons {
+    width: fit-content;
+    position: absolute;
+    right: 0px;
+}

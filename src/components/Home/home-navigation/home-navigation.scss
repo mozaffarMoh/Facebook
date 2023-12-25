@@ -1,0 +1,57 @@
+.navigation-icon {
+    background-size: auto;
+    width: 33px;
+    height: 33px;
+    background-repeat: no-repeat;
+    display: inline-block
+}
+
+.group-icon-1 {
+    background-image: url('https://static.xx.fbcdn.net/rsrc.php/v3/yz/r/4GR4KRf3hN2.png');
+}
+
+.group-icon-2 {
+    background-image: url('https://static.xx.fbcdn.net/rsrc.php/v3/yV/r/vTDQ3deAsEh.png')
+}
+
+.group-icon-3 {
+    background-image: url('https://static.xx.fbcdn.net/rsrc.php/v3/yw/r/BWFZmVqqxc5.png')
+}
+
+.navigation-div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: 5px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.navigation-div:hover {
+    background-color: rgb(226, 232, 238);
+}
+
+.navigation-div h4 {
+    font-weight: 800;
+    margin-left: 10px;
+    font-size: 13px;
+}
+
+.splitter-line {
+    width: 100%;
+    margin-top: 15px;
+    height: 1px;
+    background-color: rgb(0, 0, 0, 0.2);
+}
+
+.home-footer {
+    font-size: 11px;
+    margin-top: 20px;
+    color: gray;
+}
+
+a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

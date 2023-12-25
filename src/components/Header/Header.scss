@@ -1,0 +1,135 @@
+/* Header Style */
+
+.search-icon,
+.arrow-icon-div,
+.profile-section-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar {
+    box-shadow: 0px 0px 5px grey;
+    display: flex;
+    position: relative;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    background-color: white;
+}
+
+/* Search Section */
+
+.search-input {
+    width: 100%;
+    height: 40px;
+    background-color: whitesmoke;
+    color: black;
+    border-radius: 30px;
+    font-size: 15px;
+    margin-left: 10px;
+    padding: 15px;
+    padding-left: 40px;
+    outline: none;
+}
+
+.search-icon {
+    height: 40px;
+    position: absolute;
+}
+
+.search-icon-radius {
+    background-color: gainsboro;
+    width: 42px;
+    height: 42px;
+    font-size: 22px;
+    padding: 10px;
+    margin-left: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.arrow-icon-div {
+    height: 40px;
+    font-size: 20px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.arrow-icon-div:hover {
+    background-color: rgb(232, 232, 238);
+    color: black;
+    border-radius: 50%;
+}
+
+.show-search-dialog {
+    transition: 2s;
+}
+
+
+/* Navigate Section */
+
+.navigate-icon-div {
+    height: 110%;
+    margin-left: 10px;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.navigate-icon-div:hover {
+    background-color: rgb(247, 242, 242);
+    cursor: pointer;
+}
+
+.mark-line {
+    background-color: transparent;
+    height: 3px;
+    width: 100%;
+    position: relative;
+    top: 13px;
+}
+
+.navigate-icon {
+    color: gray;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.profile-section-icon {
+    background-color: gainsboro;
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    padding: 10px;
+    margin-left: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.profile-icon {
+    padding: 0px;
+}
+
+.badge {
+    text-align: center;
+    width: 23px;
+    height: 18px;
+    padding: 2px;
+    background-color: red;
+    color: white;
+    font-size: 10px;
+    border-radius: 17px;
+    position: absolute;
+    top: 0px;
+    right: -10px;
+}
+
+.profile-icon img {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
+
+.profile-section-icon:hover {
+    background-color: rgb(206, 193, 193);
+}

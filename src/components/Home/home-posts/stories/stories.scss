@@ -1,0 +1,130 @@
+.stories {
+    width: 100%;
+    height: 7%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.story-you,
+.story-others {
+    position: relative;
+    width: 150px;
+    height: 250px;
+    margin-left: 5px;
+    background-color: white;
+    border-radius: 13px;
+    cursor: pointer;
+}
+
+.story-you-image {
+    background-image: url(../../../../assets/images/header/profile-picture.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 120%;
+    height: 330%;
+}
+
+.story-you:hover .story-you-image {
+    width: 117%;
+    height: 335%;
+    transition: 0.2s ease-in-out;
+}
+
+.create-story-icon {
+    width: 38px;
+    height: 38px;
+    background-color: white;
+    position: absolute;
+    bottom: 15%;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.create-story-icon div {
+    background-color: rgb(71, 71, 253);
+    position: absolute;
+    bottom: 10%;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.story-you .brightness,
+.story-others .brightness {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.story-you:hover .brightness,
+.story-others:hover .brightness {
+    background-color: rgb(0, 0, 0, 0.1);
+    z-index: 30;
+}
+
+.story-image-page {
+    width: 40px;
+    height: 40px;
+    background-color: rgb(125, 82, 226);
+    padding: 5px;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.story-image-page img {
+    width: 40px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.story-image-title {
+    position: absolute;
+    bottom: 0px;
+    padding: 10px;
+    font-weight: 600;
+    background-color: transparent;
+    color: white;
+}
+
+.story-content {
+    width: 120%;
+    height: 120%;
+    background-color: blue;
+}
+
+.story-others:hover .story-content {
+    margin-right: 2px;
+    margin-bottom: 5px;
+    transition: margin 0.5s ease-in-out;
+}
+
+.arrow-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    z-index: 40;
+    cursor: pointer;
+}
+
+.arrow-circle:hover {
+    background-color: rgb(228, 221, 221);
+    transition: .5s ease
+}
+
+.arrow-left {
+    left: 150px
+}
+
+.arrow-right {
+    right: 150px
+}
