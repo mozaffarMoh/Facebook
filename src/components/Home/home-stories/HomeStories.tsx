@@ -1,10 +1,14 @@
-import "./stories.scss";
+import "./HomeStories.scss";
 import React from "react";
-import { contactsArray } from "../../home-contacts/contactsArray";
+import { contactsArray } from "../home-contacts/contactsArray";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import { MediaQuery } from "../../../MediaQuery";
+import { MediaQuery } from "../../MediaQuery";
+import { useDispatch } from "react-redux";
+import { setShowStoryDetails } from "../../../Slices/showStoryDetails";
+import { addStoryData, removeStoryData } from "../../../Slices/sendStoryData";
 
-const Stories = () => {
+const HomeStories = () => {
+  const dispatch = useDispatch();
   const { isScreen555 } = MediaQuery();
   const [firstElement, setFirstElement] = React.useState(0);
   const [lastElement, setLastElement] = React.useState(3);
@@ -28,8 +32,15 @@ const Stories = () => {
     }
   };
 
+  const handleNewStoryWindow = (storyData: any) => {
+    dispatch(removeStoryData());
+    dispatch(setShowStoryDetails(true));
+    dispatch(addStoryData(storyData));
+  };
+
   return (
     <div className="stories">
+      {/* Arrow Left */}
       {firstElement !== 0 && (
         <div
           className={`arrow-circle arrow-left ${isScreen555 && "left-4 "}`}
@@ -40,6 +51,8 @@ const Stories = () => {
           </svg>
         </div>
       )}
+
+      {/* Arrow Right */}
       {lastElement < contactsArray.length && (
         <div
           className={`arrow-circle arrow-right ${isScreen555 && "right-4 "}`}
@@ -50,6 +63,8 @@ const Stories = () => {
           </svg>
         </div>
       )}
+
+      {/* Create-Story */}
       {firstElement === 0 && (
         <div className="story-you flex flex-col items-center overflow-hidden">
           <div className="brightness"></div>
@@ -100,6 +115,7 @@ const Stories = () => {
                 <div
                   className="story-others flex flex-col items-center overflow-hidden"
                   ref={ref}
+                  onClick={() => handleNewStoryWindow(story)}
                 >
                   <div className="brightness"></div>
                   <div className="story-image-page z-20">
@@ -118,4 +134,4 @@ const Stories = () => {
   );
 };
 
-export default Stories;
+export default HomeStories;

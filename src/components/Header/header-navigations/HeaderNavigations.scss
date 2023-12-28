@@ -1,0 +1,28 @@
+
+/* Navigate Section */
+
+.navigate-icon-div {
+    height: 110%;
+    margin-left: 10px;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.navigate-icon-div:hover {
+    background-color: rgb(247, 242, 242);
+    cursor: pointer;
+}
+
+.mark-line {
+    background-color: transparent;
+    height: 3px;
+    width: 100%;
+    position: relative;
+    top: 13px;
+}
+
+.navigate-icon {
+    color: gray;
+    margin-top: 5px;
+    cursor: pointer;
+}

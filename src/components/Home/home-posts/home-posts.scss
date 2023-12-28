@@ -6,6 +6,7 @@
 .posts,
 .post,
 .post-header,
+.post-header-icon,
 .post-media,
 .reactions-comments,
 .comments-input-icons {
@@ -89,23 +90,41 @@
     margin-top: 20px;
 }
 
+.post p:hover,
+.post h2:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
 
 .post-header img {
     width: 43px;
     height: 43px;
     border-radius: 50px;
     margin-right: 10px;
+    cursor: pointer;
 }
 
 .post-header h2 {
     font-weight: 800;
     font-size: 14px;
+    cursor: pointer;
 }
 
 .post-header p {
     font-weight: 800;
     font-size: 10px;
     color: grey;
+    cursor: pointer;
+}
+
+.post-header-icon {
+    padding: 8px;
+}
+
+.post-header-icon:hover {
+    border-radius: 50%;
+    background-color: whitesmoke;
+    cursor: pointer
 }
 
 .post-media {
@@ -139,6 +158,9 @@
     width: 20px;
     height: 20px;
     margin-right: 10px;
+}
+.reactions-buttons p:hover{
+    text-decoration: none;
 }
 
 .reactions-comments {

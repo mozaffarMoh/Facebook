@@ -13,6 +13,26 @@ const ToolTip = ({ text, children }: any) => {
     setIsVisible(false);
   };
 
+  const changeWidth = () => {
+    if (text.includes("Search")) {
+      return "175px";
+    } else if (text.includes("Esc")) {
+      return "130px";
+    } else {
+      return "fit-content";
+    }
+  };
+  const changeHeight = () => {
+    return "fit-content";
+  };
+  const changeLeftPosition = () => {
+    if (text.includes("Search")) {
+      return "-60px";
+    } else if (text.includes("Esc")) {
+      return "60px";
+    }
+  };
+
   return (
     <div
       className="custom-tooltip-container z-30"
@@ -24,8 +44,9 @@ const ToolTip = ({ text, children }: any) => {
         <div
           className="custom-tooltip"
           style={{
-            width: `${text.length > 15 && "175px"}`,
-            left: `${text.length > 15 && "-60px"}`,
+            width: changeWidth(),
+            height: changeHeight(),
+            left: changeLeftPosition(),
           }}
         >
           {text}

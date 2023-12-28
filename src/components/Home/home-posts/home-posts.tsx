@@ -6,6 +6,7 @@ import { ThreeDots, XLg } from "react-bootstrap-icons";
 
 const HomePosts = () => {
   const { isScreen555, isScreen666 } = MediaQuery();
+
   const createPostNavigation = [
     {
       img: "https://static.xx.fbcdn.net/rsrc.php/v3/yr/r/c0dWho49-X3.png",
@@ -65,8 +66,8 @@ const HomePosts = () => {
                   </div>
                 </div>
                 <div className="flex text-xl justify-between items-center w-14 h-10">
-                  <ThreeDots />
-                  <XLg />
+                  <div className="post-header-icon"><ThreeDots /></div>
+                  <div className="post-header-icon"><XLg /></div>
                 </div>
               </div>
 
