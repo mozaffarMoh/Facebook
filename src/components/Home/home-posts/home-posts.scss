@@ -8,6 +8,9 @@
 .post-header,
 .post-header-icon,
 .post-media,
+.reactions-buttons,
+.reactions-button,
+.animations,
 .reactions-comments,
 .comments-input-icons {
     display: flex;
@@ -143,6 +146,7 @@
     cursor: pointer;
 }
 
+
 .reactions-icon {
     background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yc/r/80qnFRz90vM.png);
     background-size: auto;
@@ -154,12 +158,36 @@
     cursor: pointer;
 }
 
+.reactions-button {
+    height: fit-content;
+    border-radius: 5px;
+    padding: 3px;
+    cursor: pointer;
+}
+
+.reactions-buttons .animations {
+    position: absolute;
+    bottom: 25px;
+    left: -35px;
+    transition-delay: 1s;
+    transition: all .5s ease-in-out;
+}
+
+.like-button:hover .animations {
+    bottom: 30px;
+}
+
+.reactions-button:hover {
+    background-color: rgb(226, 224, 224);
+}
+
 .reactions-buttons .reactions-icon {
     width: 20px;
     height: 20px;
     margin-right: 10px;
 }
-.reactions-buttons p:hover{
+
+.reactions-buttons p:hover {
     text-decoration: none;
 }
 

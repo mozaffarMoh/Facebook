@@ -24,12 +24,11 @@
     background-repeat: no-repeat;
     width: 120%;
     height: 330%;
+    transition: transform .3s ease-in-out;
 }
 
 .story-you:hover .story-you-image {
-    width: 117%;
-    height: 335%;
-    transition: 0.2s ease-in-out;
+    transform: scale(1.1);
 }
 
 .create-story-icon {
@@ -95,12 +94,12 @@
     width: 120%;
     height: 120%;
     background-color: blue;
+
+    transition: transform .5s ease-in-out;
 }
 
 .story-others:hover .story-content {
-    margin-right: 2px;
-    margin-bottom: 5px;
-    transition: margin 0.5s ease-in-out;
+    transform: scale(1.1);
 }
 
 .arrow-circle {

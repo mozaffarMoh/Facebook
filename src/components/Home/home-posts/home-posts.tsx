@@ -3,9 +3,14 @@ import profilePicture from "../../../assets/images/header/profile-picture.jpg";
 import { MediaQuery } from "../../MediaQuery";
 import { postsArray } from "./postsArray";
 import { ThreeDots, XLg } from "react-bootstrap-icons";
+import Animations from "../../Animations/Animations";
+import React from "react";
+import { ReactionsIconsArray } from "./ReactionsIconsArray";
 
 const HomePosts = () => {
   const { isScreen555, isScreen666 } = MediaQuery();
+  const [reactionState, setReactionState] = React.useState("");
+  const [showAnimations, setShowAnimations] = React.useState(false);
 
   const createPostNavigation = [
     {
@@ -22,6 +27,46 @@ const HomePosts = () => {
     },
   ];
   isScreen666 && createPostNavigation.pop();
+
+  /* Change Reaction State */
+  const handleReactionState = (value: any) => {
+    if (reactionState === "") {
+      setReactionState("Like");
+    }
+    if (value !== reactionState) {
+      setReactionState(value);
+    } else {
+      setReactionState("");
+    }
+    setTimeout(() => {
+      setShowAnimations(false);
+    }, 300);
+  };
+
+  /* Default press is Like */
+  const likeButton = () => {
+    setReactionState("Like");
+    setShowAnimations(false);
+  };
+
+  /* Disable Reaction */
+  const disableReaction = () => {
+    setReactionState("");
+    setShowAnimations(false);
+  };
+
+  /* Change Reaction Color */
+  const changeReactionColor = () => {
+    if (reactionState === "") {
+      return "text-slate-600";
+    } else if (reactionState === "Like") {
+      return "text-blue-600 ml-2 p-0.5";
+    } else if (reactionState === "Love") {
+      return "text-red-500 ml-2 p-0.5";
+    } else {
+      return "text-yellow-500 ml-2 p-0.5";
+    }
+  };
 
   return (
     <div className={`posts-section pb-5 ${isScreen666 && "w-full"}`}>
@@ -66,8 +111,12 @@ const HomePosts = () => {
                   </div>
                 </div>
                 <div className="flex text-xl justify-between items-center w-14 h-10">
-                  <div className="post-header-icon"><ThreeDots /></div>
-                  <div className="post-header-icon"><XLg /></div>
+                  <div className="post-header-icon">
+                    <ThreeDots />
+                  </div>
+                  <div className="post-header-icon">
+                    <XLg />
+                  </div>
                 </div>
               </div>
 
@@ -87,15 +136,33 @@ const HomePosts = () => {
                 {/* Icons */}
                 <div className="reactions-felling-icons flex justify-between">
                   <div className="flex items-center">
-                    {post.reactions.like && <img src={post.reactions.like} />}
-                    {post.reactions.love && <img src={post.reactions.love} />}
-                    {post.reactions.haha && <img src={post.reactions.haha} />}
-                    {post.reactions.care && <img src={post.reactions.care} />}
-                    {post.reactions.wow && <img src={post.reactions.wow} />}
-                    {post.reactions.sad && <img src={post.reactions.sad} />}
-                    {post.reactions.angry && <img src={post.reactions.angry} />}
+                    {post.reactions.like && (
+                      <img src={ReactionsIconsArray[0].Like} />
+                    )}
+                    {post.reactions.love && (
+                      <img src={ReactionsIconsArray[0].Love} />
+                    )}
+                    {post.reactions.care && (
+                      <img src={ReactionsIconsArray[0].Care} />
+                    )}
+                    {post.reactions.haha && (
+                      <img src={ReactionsIconsArray[0].Haha} />
+                    )}
+                    {post.reactions.wow && (
+                      <img src={ReactionsIconsArray[0].Wow} />
+                    )}
+                    {post.reactions.sad && (
+                      <img src={ReactionsIconsArray[0].Sad} />
+                    )}
+                    {post.reactions.angry && (
+                      <img src={ReactionsIconsArray[0].Angry} />
+                    )}
 
-                    <p className="ml-1">{post.reactions.num}</p>
+                    <p className="ml-1">
+                      {reactionState
+                        ? post.reactions.num + 1
+                        : post.reactions.num}
+                    </p>
                   </div>
                   <div className="flex items-center">
                     <p>{post.commentsNum}</p>
@@ -112,22 +179,58 @@ const HomePosts = () => {
                 </div>
                 <div className="splitter-line"></div>
                 {/* Buttons */}
-                <div className="reactions-buttons flex justify-center items-center mt-1">
-                  <div className="reactions-buttons flex justify-center items-center w-1/3 rounded-md hover:bg-slate-100 cursor-pointer p-1">
-                    <i
-                      className="reactions-icon"
-                      style={{ backgroundPosition: "0 -739px" }}
-                    ></i>
-                    <p>Like</p>
+                <div className="reactions-buttons h-fit mt-1 relative">
+                  <div
+                    className="reactions-button like-button w-1/3"
+                    onMouseEnter={() => setShowAnimations(true)}
+                    onMouseLeave={() =>
+                      setTimeout(() => {
+                        setShowAnimations(false);
+                      }, 300)
+                    }
+                  >
+                    {showAnimations && (
+                      <div className="animations">
+                        <Animations reaction={handleReactionState} />
+                      </div>
+                    )}
+
+                    {reactionState === "" ? (
+                      <div
+                        className="flex justify-center items-center"
+                        onClick={likeButton}
+                      >
+                        <i
+                          className="reactions-icon"
+                          style={{ backgroundPosition: "0px -760px" }}
+                          onClick={likeButton}
+                        ></i>
+                        <p onClick={likeButton}>Like</p>
+                      </div>
+                    ) : (
+                      <div
+                        className="flex justify-center items-center"
+                        onClick={disableReaction}
+                      >
+                        <img
+                          src={ReactionsIconsArray[0][reactionState]}
+                          width={24}
+                          height={24}
+                        />
+                        <p className={`${changeReactionColor()}`}>
+                          {reactionState}
+                        </p>{" "}
+                      </div>
+                    )}
                   </div>
-                  <div className="reactions-buttons flex justify-center items-center w-1/3 rounded-md hover:bg-slate-100 cursor-pointer p-1">
+                  <div className="reactions-button w-1/3">
                     <i
                       className="reactions-icon"
                       style={{ backgroundPosition: "0 -550px" }}
                     ></i>
                     <p>Comment</p>
                   </div>
-                  <div className="reactions-buttons flex justify-center items-center w-1/3 rounded-md hover:bg-slate-100 cursor-pointer p-1">
+                  <div className="reactions-button w-1/3">
                     <i
                       className="reactions-icon"
                       style={{ backgroundPosition: "0 -886px" }}
@@ -136,6 +239,8 @@ const HomePosts = () => {
                   </div>
                 </div>
                 <div className="splitter-line mt-1"></div>
+
+                {/* Comments */}
                 <div className="reactions-comments h-11 mt-3 p-0">
                   <div className="profile-section-icon profile-icon w-10 h-10 hover:opacity-90">
                     <img src={profilePicture} alt="profile" />

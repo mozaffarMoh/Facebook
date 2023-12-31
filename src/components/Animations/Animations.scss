@@ -1,0 +1,48 @@
+.animations,
+.animations div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.animations {
+    div {
+        cursor: pointer;
+
+        p {
+            position: absolute;
+            bottom: 60px;
+            color: transparent;
+            padding: 5px;
+            border-radius: 10px;
+        }
+
+        img {
+            transition: width .5s ease-in-out;
+            width: 60px;
+            height: 60px;
+        }
+
+        img:hover {
+            width: 70px;
+            height: 70px;
+        }
+
+        .care-item {
+            width: 57px;
+            height: 38px;
+        }
+        .care-item:hover {
+            width: 67px;
+            height: 48px;
+        }
+    }
+
+    .item:hover {
+        p {
+            background-color: rgb(32, 32, 32);
+            color: white;
+            transition: all .5s ease-in-out;
+        }
+    }
+}

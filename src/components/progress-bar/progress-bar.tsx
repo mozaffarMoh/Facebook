@@ -5,7 +5,7 @@ const ProgressBar = ({ pause, reset, next }: any) => {
   const props = useSpring({
     from: { width: "0%", backgroundColor: "grey" },
     to: { width: "100%" },
-    config: { duration: 5000},
+    config: { duration: 6000},
     pause: pause,
     reset : reset,
     onRest: next
