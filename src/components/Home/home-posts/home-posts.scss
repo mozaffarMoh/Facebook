@@ -147,7 +147,8 @@
 }
 
 
-.reactions-icon {
+.reactions-icon,
+.reactions-icon-send {
     background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yc/r/80qnFRz90vM.png);
     background-size: auto;
     width: 17px;
@@ -156,6 +157,10 @@
     display: inline-block;
     margin: 5px;
     cursor: pointer;
+}
+
+.reactions-icon-send {
+    background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yj/r/cwRlWeWjMfO.png);
 }
 
 .reactions-button {

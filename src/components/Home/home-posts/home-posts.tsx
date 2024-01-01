@@ -11,6 +11,8 @@ const HomePosts = () => {
   const { isScreen555, isScreen666 } = MediaQuery();
   const [reactionState, setReactionState] = React.useState("");
   const [showAnimations, setShowAnimations] = React.useState(false);
+  const [comments, setComments] = React.useState([]);
+  const [userComment, setUserComment] = React.useState("");
 
   const createPostNavigation = [
     {
@@ -67,6 +69,30 @@ const HomePosts = () => {
       return "text-yellow-500 ml-2 p-0.5";
     }
   };
+
+  /* Add Comment */
+  const addComment = () => {
+    if (userComment) {
+      const newArray: any = [...comments];
+      newArray.push({
+        comment: userComment,
+        img: profilePicture,
+        title: "Mozaffar Mohammad",
+      });
+      setComments(newArray);
+      setUserComment("");
+    }
+  };
+
+  /* Add Comment when press Enter */
+  React.useEffect(() => {
+    const handleEnterPress = (event: any) => {
+      if (event.keyCode === 13) {
+        addComment();
+      }
+    };
+    document.addEventListener("keydown", handleEnterPress);
+  }, [addComment]);
 
   return (
     <div className={`posts-section pb-5 ${isScreen666 && "w-full"}`}>
@@ -241,6 +267,31 @@ const HomePosts = () => {
                 <div className="splitter-line mt-1"></div>
 
                 {/* Comments */}
+                {comments &&
+                  comments.map((item: any, index: number) => {
+                    return (
+                      <div className="flex h-100 mt-2" key={index}>
+                        <div className="profile-section-icon profile-icon w-10 h-10 hover:opacity-90">
+                          <img src={item.img} alt="" />
+                        </div>
+                        <div className="flex flex-col">
+                          <div className="flex flex-col bg-slate-200 rounded-3xl py-1 px-3 ml-2 text-black">
+                            <p className="text-md">{item.title}</p>
+                            <body className="text-sm font-thin">
+                              {item.comment}
+                            </body>
+                          </div>
+                          <div className="flex w-60 justify-around items-center py-1">
+                            <body className="text-sm font-thin ml-5">just now</body>
+                            <p>Like</p>
+                            <p>Reply</p>
+                            <p>Share</p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                {/* Write a comment */}
                 <div className="reactions-comments h-11 mt-3 p-0">
                   <div className="profile-section-icon profile-icon w-10 h-10 hover:opacity-90">
                     <img src={profilePicture} alt="profile" />
@@ -249,7 +300,10 @@ const HomePosts = () => {
                     type="text"
                     placeholder="Write a public comment..."
                     className={`font-thin ${isScreen555 && "text-sm"}`}
+                    value={userComment}
+                    onChange={(e: any) => setUserComment(e.target.value)}
                   />
+
                   <div className="comments-input-icons">
                     <i
                       className="reactions-icon"
@@ -270,6 +324,11 @@ const HomePosts = () => {
                     <i
                       className="reactions-icon"
                       style={{ backgroundPosition: "0px -1333px" }}
+                    ></i>
+                    <i
+                      className="reactions-icon-send"
+                      style={{ backgroundPosition: "0px -1318px" }}
+                      onClick={addComment}
                     ></i>
                   </div>
                 </div>
