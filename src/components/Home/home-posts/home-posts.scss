@@ -12,7 +12,9 @@
 .reactions-button,
 .animations,
 .reactions-comments,
-.comments-input-icons {
+.comments-input-icons,
+.edit-comment-div,
+.edit-comment-option {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,7 +27,6 @@
     justify-content: flex-start;
     width: 70%;
     height: 93%;
-    margin-top: 20px;
     border-radius: 15px;
 }
 
@@ -87,10 +88,9 @@
     align-items: flex-start;
     width: 100%;
     height: fit-content;
-    max-height: 1000px;
+
     background-color: white;
     border-radius: 10px;
-    margin-top: 20px;
 }
 
 .post p:hover,
@@ -204,4 +204,38 @@
     width: fit-content;
     position: absolute;
     right: 0px;
+}
+
+.comment:hover .edit-comment {
+    display: flex !important;
+}
+
+.edit-comment-dialog {
+    position: absolute;
+    top: -50px;
+    left: 150px;
+    width: 160px;
+    height: 60px;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: white;
+    box-shadow: 5px 5px 15px black;
+    font-size: 13px;
+
+    .edit-comment-option {
+        flex-direction: column;
+        border-radius: 5px;
+        height: 25px;
+        cursor: pointer;
+    }
+
+    .edit-comment-option:hover {
+        background-color: rgb(221, 216, 216);
+    }
+
+    svg {
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+    }
 }

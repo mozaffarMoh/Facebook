@@ -6,13 +6,17 @@ import { ThreeDots, XLg } from "react-bootstrap-icons";
 import Animations from "../../Animations/Animations";
 import React from "react";
 import { ReactionsIconsArray } from "./ReactionsIconsArray";
+import ToolTip from "../../Tooltip/Tooltip";
 
 const HomePosts = () => {
   const { isScreen555, isScreen666 } = MediaQuery();
   const [reactionState, setReactionState] = React.useState("");
   const [showAnimations, setShowAnimations] = React.useState(false);
-  const [comments, setComments] = React.useState([]);
+  const [postIndex, setPostIndex] = React.useState(0);
   const [userComment, setUserComment] = React.useState("");
+  const [editCommentDialog, setEditCommentDialog] = React.useState(false);
+  const [editCommentIndex, setEditCommentIndex] = React.useState(0);
+  const editCommentRef: any = React.useRef(null);
 
   const createPostNavigation = [
     {
@@ -29,6 +33,21 @@ const HomePosts = () => {
     },
   ];
   isScreen666 && createPostNavigation.pop();
+
+  /* Close Dialog when click outside of it */
+  React.useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      if (
+        editCommentRef.current &&
+        !editCommentRef.current.contains(event.target)
+      ) {
+        setEditCommentDialog(false);
+      }
+    };
+    if (editCommentDialog) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+  }, [editCommentDialog]);
 
   /* Change Reaction State */
   const handleReactionState = (value: any) => {
@@ -71,15 +90,13 @@ const HomePosts = () => {
   };
 
   /* Add Comment */
-  const addComment = () => {
+  const addComment = (commentsArray: any) => {
     if (userComment) {
-      const newArray: any = [...comments];
-      newArray.push({
+      commentsArray.push({
         comment: userComment,
         img: profilePicture,
         title: "Mozaffar Mohammad",
       });
-      setComments(newArray);
       setUserComment("");
     }
   };
@@ -88,10 +105,14 @@ const HomePosts = () => {
   React.useEffect(() => {
     const handleEnterPress = (event: any) => {
       if (event.keyCode === 13) {
-        addComment();
+        addComment(postsArray[postIndex].comments);
       }
     };
     document.addEventListener("keydown", handleEnterPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleEnterPress);
+    };
   }, [addComment]);
 
   return (
@@ -267,30 +288,80 @@ const HomePosts = () => {
                 <div className="splitter-line mt-1"></div>
 
                 {/* Comments */}
-                {comments &&
-                  comments.map((item: any, index: number) => {
+
+                {post.comments &&
+                  post.comments.map((item: any, index: number) => {
                     return (
                       <div className="flex h-100 mt-2" key={index}>
                         <div className="profile-section-icon profile-icon w-10 h-10 hover:opacity-90">
                           <img src={item.img} alt="" />
                         </div>
-                        <div className="flex flex-col">
-                          <div className="flex flex-col bg-slate-200 rounded-3xl py-1 px-3 ml-2 text-black">
-                            <p className="text-md">{item.title}</p>
-                            <body className="text-sm font-thin">
-                              {item.comment}
-                            </body>
+                        <div>
+                          <div className="flex justify-center items-center relative comment">
+                            <div className="flex flex-col bg-slate-200 rounded-3xl py-1 px-3 ml-2 text-black">
+                              <p className="text-md">{item.title}</p>
+                              <span className="text-sm font-thin">
+                                {item.comment}
+                              </span>
+                            </div>
+                            {/* Edit comment button */}
+                            {!editCommentDialog && (
+                              <div
+                                className="edit-comment ml-2 hidden"
+                                onClick={() => {
+                                  setEditCommentDialog(true);
+                                  setEditCommentIndex(index);
+                                }}
+                              >
+                                <ToolTip text="Edit or delete this">
+                                  <div className="post-header-icon">
+                                    <ThreeDots />
+                                  </div>
+                                </ToolTip>
+                              </div>
+                            )}
+
+                            {/* Edit comment dialog */}
+                            {editCommentDialog &&
+                              index === editCommentIndex && (
+                                <div
+                                  className="edit-comment-dialog"
+                                  ref={editCommentRef}
+                                >
+                                  <div
+                                    className="edit-comment-option"
+                                    onClick={() => console.log("Edit comment")}
+                                  >
+                                    Edit
+                                  </div>
+                                  <div className="edit-comment-option">
+                                    Delete
+                                  </div>
+                                  <svg
+                                    aria-hidden="true"
+                                    height="12"
+                                    viewBox="0 0 25 12"
+                                    width="25"
+                                    fill="white"
+                                  >
+                                    <path d="M24.553.103c-2.791.32-5.922 1.53-7.78 3.455l-9.62 7.023c-2.45 2.54-5.78 1.645-5.78-2.487V2.085C1.373 1.191.846.422.1.102h24.453z"></path>
+                                  </svg>
+                                </div>
+                              )}
                           </div>
-                          <div className="flex w-60 justify-around items-center py-1">
-                            <body className="text-sm font-thin ml-5">just now</body>
+
+                          <div className="flex w-48 justify-around items-center py-1">
+                            <span className="text-sm font-thin ml-5">
+                              just now
+                            </span>
                             <p>Like</p>
                             <p>Reply</p>
-                            <p>Share</p>
                           </div>
                         </div>
                       </div>
                     );
                   })}
+
                 {/* Write a comment */}
                 <div className="reactions-comments h-11 mt-3 p-0">
                   <div className="profile-section-icon profile-icon w-10 h-10 hover:opacity-90">
@@ -302,6 +373,7 @@ const HomePosts = () => {
                     className={`font-thin ${isScreen555 && "text-sm"}`}
                     value={userComment}
                     onChange={(e: any) => setUserComment(e.target.value)}
+                    onClick={() => setPostIndex(index)}
                   />
 
                   <div className="comments-input-icons">
@@ -328,7 +400,7 @@ const HomePosts = () => {
                     <i
                       className="reactions-icon-send"
                       style={{ backgroundPosition: "0px -1318px" }}
-                      onClick={addComment}
+                      onClick={() => addComment(post.comments)}
                     ></i>
                   </div>
                 </div>

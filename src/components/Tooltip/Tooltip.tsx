@@ -18,6 +18,8 @@ const ToolTip = ({ text, children }: any) => {
       return "175px";
     } else if (text.includes("Esc")) {
       return "130px";
+    } else if (text.includes("this")) {
+      return "135px";
     } else {
       return "fit-content";
     }
@@ -30,6 +32,11 @@ const ToolTip = ({ text, children }: any) => {
       return "-60px";
     } else if (text.includes("Esc")) {
       return "60px";
+    }
+  };
+  const changeBottomPosition = () => {
+    if (text.includes("this")) {
+      return "-37px";
     }
   };
 
@@ -47,6 +54,7 @@ const ToolTip = ({ text, children }: any) => {
             width: changeWidth(),
             height: changeHeight(),
             left: changeLeftPosition(),
+            top: changeBottomPosition(),
           }}
         >
           {text}
