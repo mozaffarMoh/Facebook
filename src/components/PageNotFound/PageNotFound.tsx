@@ -8,7 +8,7 @@ const PageNotFound = () => {
       <h4>Sorry we can't find this url in our website</h4>
       <Link to={'/'}>
       <button className="page-button">
-        Back To News
+        Back To Home
       </button>
       </Link>
     </div>

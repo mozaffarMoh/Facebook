@@ -5,6 +5,7 @@ import profilePicture from "../../../assets/images/header/profile-picture.jpg";
 const HomeNavigation = () => {
   const [focused, setFocused] = React.useState(false);
   const [seeMore, setSeeMore] = React.useState(false);
+  
 
   const handleFocus = () => {
     setFocused(true);

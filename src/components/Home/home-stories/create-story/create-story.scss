@@ -5,18 +5,28 @@
 .story-text,
 .story-actions,
 .upload-photo,
-.upload-text {
+.upload-text,
+.black-area,
+.text-area-value,
+.colors,
+.buttons {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.create-story-page-with-header {
+    height: 100vh;
+}
+
 .create-story-page {
+    justify-content: space-between;
     width: 100%;
     height: 100vh;
 
     /* Text */
     .story-text {
+        width: 400px;
         height: 100%;
         flex-direction: column;
         justify-content: flex-start;
@@ -24,11 +34,9 @@
         box-shadow: 5px 5px 10px rgb(187, 186, 186);
         z-index: 20;
 
-
         .setting-icon {
             background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yF/r/qZ8dsad8iZp.png);
         }
-
 
         h1 {
             font-weight: 800 !important;
@@ -45,7 +53,7 @@
             position: relative;
 
             .text-input {
-                width: 320px;
+                width: 100%;
                 height: 200px;
                 margin-top: 10px;
                 border: 1px solid grey;
@@ -74,39 +82,94 @@
                 transition: all .3s ease
             }
 
-            .discard-button {
-                width: 43%;
-                background-color: rgb(224, 222, 222);
+            /* Select Font */
+            .select-font {
+                width: 100%;
+                height: 50px;
                 border-radius: 10px;
-                padding: 10px;
+                border: 1px solid black;
+                margin-top: 10px;
+                cursor: pointer;
             }
 
-            .discard-button:hover {
-                background-color: rgb(204, 201, 201);
-            }
-
-            .share-button {
-                width: 55%;
-                background-color: rgb(66, 66, 190);
-                color: white;
+            /* Select Background */
+            .select-bg {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                height: 150px;
+                margin-top: 10px;
+                border: 1px solid black;
                 border-radius: 10px;
-                padding: 10px;
+                overflow-x: auto;
+
+                p {
+                    font-weight: 200;
+                    color: grey;
+                    margin-top: 10px;
+                }
+
+                .colors {
+                    width: 100%;
+                    height: 100%;
+                    padding: 10px;
+                    flex-wrap: wrap;
+
+                    .color {
+                        height: 40px;
+                        width: 40px;
+                        border-radius: 50%;
+                        margin-left: 5px;
+                        cursor: pointer;
+                        transition: all .3s linear;
+                    }
+
+                    .show-border {
+                        border: 4px solid blue;
+                        width: 48px;
+                        height: 48px;
+                        transition: all .3s linear;
+                    }
+                }
             }
 
-            .share-button:hover {
+            /* buttons */
+            .buttons {
+                justify-content: space-between;
+                margin-top: 10px;
 
-                background-color: rgb(60, 60, 167)
+                .discard-button {
+                    width: 43%;
+                    background-color: rgb(224, 222, 222);
+                    border-radius: 10px;
+                    padding: 7px;
+                }
+
+                .discard-button:hover {
+                    background-color: rgb(204, 201, 201);
+                }
+
+                .share-button {
+                    width: 55%;
+                    background-color: rgb(66, 66, 190);
+                    color: white;
+                    border-radius: 10px;
+                    padding: 7px;
+                }
+
+                .share-button:hover {
+                    background-color: rgb(60, 60, 167)
+                }
             }
         }
-
-
     }
 
     /* Actions */
     .story-actions {
         position: relative;
         background-color: #E4E6EB;
-        height: 100%;
+        width: 80%;
+        height: 100vh;
 
         .upload {
             flex-direction: column;
@@ -163,8 +226,8 @@
             flex-direction: column;
             position: absolute;
             top: 20px;
-            width: 90%;
-            height: 80%;
+            width: 95%;
+            height: 90%;
             background-color: white;
             border-radius: 10px;
 
@@ -180,6 +243,19 @@
                 height: 95%;
                 background-color: black;
                 border-radius: inherit;
+            }
+
+            .text-area-value {
+                width: 300px;
+                height: 95%;
+                border-radius: inherit;
+                background-image: linear-gradient(to left, rgb(146, 146, 240), rgb(126, 21, 224));
+
+                h1 {
+                    font-size: 20px;
+                    font-weight: 800;
+                    color: gainsboro;
+                }
             }
         }
     }
