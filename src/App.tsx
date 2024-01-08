@@ -1,21 +1,20 @@
 import "./App.scss";
-import Header from "./components/Header/Header";
 import Home from "./components/Home/Home";
-import StoryDetails from "./components/Home/home-stories/story-details/story-details";
-import { useSelector } from "react-redux";
-import { RootType } from "./store/store";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import PageNotFound from "./components/PageNotFound/PageNotFound";
+import CreateStory from "./components/Home/home-stories/create-story/create-story";
 
 function App() {
-  const showStoryDetails = useSelector(
-    (state: RootType) => state.showStoryDetails.value
-  );
-  return !showStoryDetails ? (
+  return (
     <>
-      <Header />
-      <Home />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="create-story" element={<CreateStory />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </Router>
     </>
-  ) : (
-    <StoryDetails />
   );
 }
 

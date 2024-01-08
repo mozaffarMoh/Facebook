@@ -1,0 +1,210 @@
+/* Create story page */
+
+.create-story-page,
+.icon-circle,
+.story-text,
+.story-actions,
+.upload-photo,
+.upload-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-story-page {
+    width: 100%;
+    height: 100vh;
+
+    /* Text */
+    .story-text {
+        height: 100%;
+        flex-direction: column;
+        justify-content: flex-start;
+        background-color: whitesmoke;
+        box-shadow: 5px 5px 10px rgb(187, 186, 186);
+        z-index: 20;
+
+
+        .setting-icon {
+            background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yF/r/qZ8dsad8iZp.png);
+        }
+
+
+        h1 {
+            font-weight: 800 !important;
+            font-size: 20px;
+        }
+
+        p {
+            font-size: 15px;
+            font-weight: 600;
+            margin-left: 20px;
+        }
+
+        .type-story {
+            position: relative;
+
+            .text-input {
+                width: 320px;
+                height: 200px;
+                margin-top: 10px;
+                border: 1px solid grey;
+                border-radius: 10px;
+            }
+
+            .text-input:focus {
+                outline: none;
+                border: 1px solid blue;
+                box-shadow: 0 0 10px #719ECE;
+            }
+
+            .start-typing {
+                position: absolute;
+                top: 40px;
+                left: 32px;
+                transition: all .3s ease;
+                cursor: auto;
+            }
+
+            .moveLabelToTop {
+                position: absolute;
+                top: 25px;
+                color: blue;
+                font-size: 13px;
+                transition: all .3s ease
+            }
+
+            .discard-button {
+                width: 43%;
+                background-color: rgb(224, 222, 222);
+                border-radius: 10px;
+                padding: 10px;
+            }
+
+            .discard-button:hover {
+                background-color: rgb(204, 201, 201);
+            }
+
+            .share-button {
+                width: 55%;
+                background-color: rgb(66, 66, 190);
+                color: white;
+                border-radius: 10px;
+                padding: 10px;
+            }
+
+            .share-button:hover {
+
+                background-color: rgb(60, 60, 167)
+            }
+        }
+
+
+    }
+
+    /* Actions */
+    .story-actions {
+        position: relative;
+        background-color: #E4E6EB;
+        height: 100%;
+
+        .upload {
+            flex-direction: column;
+            position: relative;
+            width: 220px;
+            height: 55%;
+            border-radius: 10px;
+            margin-left: 20px;
+            cursor: pointer;
+        }
+
+        .upload-photo {
+            background-image: linear-gradient(to top left, rgb(191, 186, 230), rgb(129, 112, 238));
+        }
+
+        .upload-text {
+            background-image: linear-gradient(to top left, rgb(236, 60, 60), rgb(231, 133, 223));
+        }
+
+        .brightness {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+        }
+
+        .upload:hover .brightness {
+            background-color: #00000010;
+        }
+
+        .photo-icon {
+            background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/y5/r/89Ou4_JKGzU.png);
+        }
+
+        .icon-circle {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+        }
+
+        h1 {
+            font-weight: 800;
+        }
+
+        p {
+            font-weight: 800;
+            font-size: 13px;
+            margin-top: 10px;
+            color: white;
+        }
+
+        .upload-text-dialog {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 20px;
+            width: 90%;
+            height: 80%;
+            background-color: white;
+            border-radius: 10px;
+
+            p {
+                font-size: 15px;
+                color: black;
+                margin-bottom: 10px;
+            }
+
+            .black-area {
+                width: 100%;
+                width: 100%;
+                height: 95%;
+                background-color: black;
+                border-radius: inherit;
+            }
+        }
+    }
+
+
+    /* Icons */
+    .icon-circle {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background-color: rgb(211, 206, 206);
+        cursor: pointer;
+
+        .create-story-icons {
+            background-size: auto;
+            width: 20px;
+            height: 20px;
+            background-repeat: no-repeat;
+            display: inline-block;
+            margin: 5px;
+        }
+
+    }
+
+    .icon-circle:hover {
+        background-color: rgb(190, 186, 186);
+    }
+}

@@ -6,6 +6,7 @@ import { MediaQuery } from "../../MediaQuery";
 import { useDispatch } from "react-redux";
 import { setShowStoryDetails } from "../../../Slices/showStoryDetails";
 import { addStoryData, removeStoryData } from "../../../Slices/sendStoryData";
+import { Link } from "react-router-dom";
 
 const HomeStories = () => {
   const dispatch = useDispatch();
@@ -66,31 +67,33 @@ const HomeStories = () => {
 
       {/* Create-Story */}
       {firstElement === 0 && (
-        <div className="story-you flex flex-col items-center overflow-hidden">
-          <div className="brightness"></div>
-          <div className="story-you-image"></div>
-          <div className="create-story-icon flex justify-center">
-            <div>
-              <svg viewBox="0 0 20 20" width="20" height="20" fill="white">
-                <g fillRule="evenodd" transform="translate(-446 -350)">
-                  <g fillRule="nonzero">
-                    <path
-                      d="M95 201.5h13a1 1 0 1 0 0-2H95a1 1 0 1 0 0 2z"
-                      transform="translate(354.5 159.5)"
-                    ></path>
-                    <path
-                      d="M102.5 207v-13a1 1 0 1 0-2 0v13a1 1 0 1 0 2 0z"
-                      transform="translate(354.5 159.5)"
-                    ></path>
+        <Link to={"/create-story"}>
+          <div className="story-you flex flex-col items-center overflow-hidden">
+            <div className="brightness"></div>
+            <div className="story-you-image"></div>
+            <div className="create-story-icon flex justify-center">
+              <div>
+                <svg viewBox="0 0 20 20" width="20" height="20" fill="white">
+                  <g fillRule="evenodd" transform="translate(-446 -350)">
+                    <g fillRule="nonzero">
+                      <path
+                        d="M95 201.5h13a1 1 0 1 0 0-2H95a1 1 0 1 0 0 2z"
+                        transform="translate(354.5 159.5)"
+                      ></path>
+                      <path
+                        d="M102.5 207v-13a1 1 0 1 0-2 0v13a1 1 0 1 0 2 0z"
+                        transform="translate(354.5 159.5)"
+                      ></path>
+                    </g>
                   </g>
-                </g>
-              </svg>
+                </svg>
+              </div>
+            </div>
+            <div className="flex justify-center items-end w-full h-full text-sm">
+              <p className="mb-2">Create story</p>
             </div>
           </div>
-          <div className="flex justify-center items-end w-full h-full text-sm">
-            <p className="mb-2">Create story</p>
-          </div>
-        </div>
+        </Link>
       )}
       <TransitionGroup className="flex w-50 overflow-hidden">
         {contactsArray
