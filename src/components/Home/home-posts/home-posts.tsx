@@ -330,7 +330,6 @@ const HomePosts = () => {
                                 >
                                   <div
                                     className="edit-comment-option"
-                                    onClick={() => console.log("Edit comment")}
                                   >
                                     Edit
                                   </div>

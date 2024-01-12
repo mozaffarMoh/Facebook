@@ -8,8 +8,13 @@
 .upload-text,
 .black-area,
 .text-area-value,
+.photo-area,
 .colors,
-.buttons {
+.buttons,
+.photo-story,
+.photo-area-label,
+.add-text,
+.Aa-icon {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -96,7 +101,7 @@
             .select-bg {
                 display: flex;
                 flex-direction: column;
-                width: 100%;
+                width: 98%;
                 height: 150px;
                 margin-top: 10px;
                 border: 1px solid black;
@@ -133,32 +138,35 @@
                 }
             }
 
-            /* buttons */
-            .buttons {
-                justify-content: space-between;
-                margin-top: 10px;
+        }
 
-                .discard-button {
-                    width: 43%;
-                    background-color: rgb(224, 222, 222);
-                    border-radius: 10px;
-                    padding: 7px;
-                }
+        .photo-story {
+            width: 100%;
+            height: 70%;
+            padding: 10px;
+            flex-direction: column;
+            justify-content: space-between;
 
-                .discard-button:hover {
-                    background-color: rgb(204, 201, 201);
-                }
+            .add-text {
+                justify-content: flex-start;
+                width: 100%;
+                height: 50px;
+                padding: 10px;
+            }
 
-                .share-button {
-                    width: 55%;
-                    background-color: rgb(66, 66, 190);
-                    color: white;
-                    border-radius: 10px;
-                    padding: 7px;
-                }
+            .add-text:hover {
+                background-color: rgb(236, 234, 234);
+                border-radius: 10px;
+                cursor: pointer;
+            }
 
-                .share-button:hover {
-                    background-color: rgb(60, 60, 167)
+            .Aa-icon {
+                height: 40px;
+                border-radius: 50%;
+                background-color: rgb(226, 223, 223);
+
+                p {
+                    margin-right: 50%;
                 }
             }
         }
@@ -245,11 +253,11 @@
                 border-radius: inherit;
             }
 
-            .text-area-value {
+            .text-area-value,
+            .photo-area {
                 width: 300px;
                 height: 95%;
                 border-radius: inherit;
-                background-image: linear-gradient(to left, rgb(146, 146, 240), rgb(126, 21, 224));
 
                 h1 {
                     font-size: 20px;
@@ -257,9 +265,96 @@
                     color: gainsboro;
                 }
             }
+
+            .text-area-value {
+                background-image: linear-gradient(to left, rgb(146, 146, 240), rgb(126, 21, 224));
+                overflow-x: auto;
+            }
+
+            .photo-area-all {
+                width: 250px;
+                height: 85%;
+            }
+
+            .photo-area {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                bottom: 15px;
+                border: 1px solid white;
+                border-radius: 10px;
+
+                img {
+                    width: 100%;
+                    overflow: hidden;
+                }
+
+                h1 {
+                    position: absolute;
+                    top: 45%;
+                    left: 35%;
+                }
+            }
+
+            h2 {
+                color: white;
+            }
+
+            .textarea-on-photo{
+                width : 100%;
+                height: 50px !important;
+                height: fit-content;
+                padding : 10px;
+                background-color: transparent;
+                border: 1px solid transparent;
+                color : white;
+                font-size: 25px;
+                position : absolute;
+                top : 40%;
+                left: 0px;
+                text-align: center;
+            }
+
         }
     }
 
+
+
+
+
+
+
+
+
+    /* Discard and Share Buttons */
+    .buttons {
+        justify-content: space-between;
+        margin-top: 10px;
+        width: 100%;
+
+        .discard-button {
+            width: 43%;
+            background-color: rgb(224, 222, 222);
+            border-radius: 10px;
+            padding: 7px;
+        }
+
+        .discard-button:hover {
+            background-color: rgb(204, 201, 201);
+        }
+
+        .share-button {
+            width: 55%;
+            background-color: rgb(66, 66, 190);
+            color: white;
+            border-radius: 10px;
+            padding: 7px;
+        }
+
+        .share-button:hover {
+            background-color: rgb(60, 60, 167);
+        }
+    }
 
     /* Icons */
     .icon-circle {

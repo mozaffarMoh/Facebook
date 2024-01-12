@@ -15,6 +15,7 @@ import {
 import ProgressBar from "../../../progress-bar/progress-bar";
 import Animations from "../../../Animations/Animations";
 import { ReactionsIconsArray } from "../../home-posts/ReactionsIconsArray";
+import { Link } from "react-router-dom";
 
 const StoryDetails = () => {
   const dispatch = useDispatch();
@@ -31,7 +32,6 @@ const StoryDetails = () => {
   const handleClose = () => {
     dispatch(removeStoryData());
     dispatch(setShowStoryDetails(false));
-    console.log(storyDataReceived);
   };
 
   /* Handle Show Story */
@@ -126,23 +126,26 @@ const StoryDetails = () => {
 
             <h1 className="text-sm font-bold">Your Story</h1>
 
-            <div className="create-story my-5">
-              <div className="create-story-circle">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 16 16"
-                  width="1.5em"
-                  height="1.5em"
-                  fill="currentColor"
-                >
-                  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path>
-                </svg>
+            {/* Create Story */}
+            <Link to={"/create-story"} onClick={handleClose}>
+              <div className="create-story my-5">
+                <div className="create-story-circle">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 16 16"
+                    width="1.5em"
+                    height="1.5em"
+                    fill="currentColor"
+                  >
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path>
+                  </svg>
+                </div>
+                <div className="create-story-text flex flex-col justify-center ml-5">
+                  <h1>Create a story</h1>
+                  <p>Share a photo or write something.</p>
+                </div>
               </div>
-              <div className="create-story-text flex flex-col justify-center ml-5">
-                <h1>Create a story</h1>
-                <p>Share a photo or write something.</p>
-              </div>
-            </div>
+            </Link>
 
             <h1 className="text-sm font-extrabold">All Stories</h1>
 
