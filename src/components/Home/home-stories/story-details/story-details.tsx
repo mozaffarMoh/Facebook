@@ -127,7 +127,7 @@ const StoryDetails = () => {
             <h1 className="text-sm font-bold">Your Story</h1>
 
             {/* Create Story */}
-            <Link to={"/create-story"} onClick={handleClose}>
+            <Link to={"/Facebook/create-story"} onClick={handleClose}>
               <div className="create-story my-5">
                 <div className="create-story-circle">
                   <svg
