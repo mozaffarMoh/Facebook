@@ -13,21 +13,23 @@ const HeaderNavigations = () => {
   const dispatch = useDispatch();
   const { isScreen800 } = MediaQuery();
 
+  /* change active value for show blue underline */
   useEffect(() => {
     const changeActive = () => {
-      location.pathname === "/Facebook" && dispatch(setActive("home"));
-      location.pathname === "/Facebook/videos" && dispatch(setActive("videos"));
-      location.pathname === "/Facebook/groups" && dispatch(setActive("groups"));
-      location.pathname === "/Facebook/gaming" && dispatch(setActive("gaming"));
+      (location.pathname === "/Facebook/" || location.pathname === "/") &&
+        dispatch(setActive("home"));
+      location.pathname === "/Facebook/videos/" && dispatch(setActive("videos"));
+      location.pathname === "/Facebook/groups/" && dispatch(setActive("groups"));
+      location.pathname === "/Facebook/gaming/" && dispatch(setActive("gaming"));
     };
     changeActive();
-  }, []);
+  }, [active]);
 
   return !isScreen800 ? (
     <div className="flex w-1/3 z-10">
       {/* Home */}
       <Link
-        to="/Facebook"
+        to="/Facebook/"
         className={`flex flex-col justify-center w-1/4 ${
           active === "home" && "rounded-none hover:bg-transparent"
         } navigate-icon-div`}
@@ -62,7 +64,7 @@ const HeaderNavigations = () => {
 
       {/* Videos */}
       <Link
-        to="/Facebook/videos"
+        to="/Facebook/videos/"
         className={`flex flex-col justify-center w-1/4 ${
           active === "videos" && "rounded-none hover:bg-transparent"
         } navigate-icon-div`}
@@ -98,7 +100,7 @@ const HeaderNavigations = () => {
 
       {/* Groups */}
       <Link
-        to="/Facebook/groups"
+        to="/Facebook/groups/"
         className={`flex flex-col justify-center w-1/4 ${
           active === "groups" && "rounded-none hover:bg-transparent"
         } navigate-icon-div`}
@@ -135,7 +137,7 @@ const HeaderNavigations = () => {
 
       {/* Gaming */}
       <Link
-        to="/Facebook/gaming"
+        to="/Facebook/gaming/"
         className={`flex flex-col justify-center w-1/4 ${
           active === "gaming" && "rounded-none  hover:bg-transparent"
         } navigate-icon-div`}

@@ -67,7 +67,7 @@ const HomeStories = () => {
 
       {/* Create-Story */}
       {firstElement === 0 && (
-        <Link to={"/create-story"}>
+        <Link to={"/Facebook/create-story"}>
           <div className="story-you flex flex-col items-center overflow-hidden">
             <div className="brightness"></div>
             <div className="story-you-image"></div>
@@ -95,7 +95,8 @@ const HomeStories = () => {
           </div>
         </Link>
       )}
-      <TransitionGroup className="flex w-50 overflow-hidden">
+
+      <TransitionGroup className="flex">
         {contactsArray
           .slice(
             firstElement >= contactsArray.length - 4

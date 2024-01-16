@@ -18,7 +18,7 @@ const Home = () => {
   return !showStoryDetails ? (
     <>
       <Header />
-      <div className="flex w-full vh-100 bg-slate-100 p-4">
+      <div className="flex w-full vh-100 bg-slate-100 p-4 overflow-auto">
         {!isScreen1000 && <HomeNavigation />}
         <div
           className={`${

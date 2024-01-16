@@ -215,11 +215,12 @@
 
     /* Story Footer */
     .story-footer {
-        width: 100%;
+        align-self: center;
+        width: 80%;
         height: 5%;
 
         .footer-input {
-            width: 30%;
+            width: 40%;
             position: relative;
 
             input {
@@ -241,21 +242,19 @@
         }
 
         .footer-animations {
-            width: 40%;
+            width: 70%;
             background-color: transparent;
         }
     }
 
     /* Footer Resonsive */
-    @media (max-width : '700px') {
+    @media (max-width : '900px') {
         .story-footer {
-            .footer-input {
-                width: 30%;
-            }
-
-            .footer-animations {
-                width: 70%;
-            }
+            width: 200%;
+            height: 8%;
+            overflow-x: auto;
+            overflow-y: hidden;
         }
     }
+
 }

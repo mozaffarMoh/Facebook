@@ -2,6 +2,7 @@ import "./create-story.scss";
 import Header from "../../../Header/Header";
 import profilePicture from "../../../../assets/images/header/profile-picture.jpg";
 import React from "react";
+import { bgColorsArray } from "./bgColorsArray";
 import { colorsArray } from "./colorsArray";
 import { MediaQuery } from "../../../MediaQuery";
 import { Resizable } from "react-resizable";
@@ -22,8 +23,9 @@ const CreateStory = () => {
   const [resizableTextArray, setResizableTextArray]: any = React.useState([]);
   const [resizableText, setResizableText] = React.useState("");
   const [textareaValue, setTextAreaValue] = React.useState("");
-  const [fontType, setFontType] = React.useState("sans-serif");
+  const [fontType, setFontType] = React.useState("");
   const [selectBG, setSelectBG] = React.useState("");
+  const [textPhotoColor, setTextPhotoColor] = React.useState("");
   const resizableRefs: React.RefObject<HTMLDivElement>[] =
     resizableTextArray.map(() => React.createRef());
 
@@ -70,16 +72,23 @@ const CreateStory = () => {
 
   /* Set value to resizable texts Array when click on outside */
   React.useEffect(() => {
-    let resizableTextNew = resizableText;
+    let newText = resizableText;
+    let newColor = textPhotoColor;
+    let newFont = fontType;
+    const newObject = {
+      text: newText,
+      color: newColor,
+      fontType: newFont,
+    };
     const handleClickOutside = (event: any) => {
       if (
         resizableRef.current &&
         !resizableRef.current.contains(event.target)
       ) {
-        setIsTextareaHidden(true);
         if (resizableText !== "") {
+          setIsTextareaHidden(true);
           let newArray = resizableTextArray;
-          newArray.push(resizableTextNew);
+          newArray.push(newObject);
           setResizableTextArray([...newArray]);
           setResizableText("");
         }
@@ -91,7 +100,7 @@ const CreateStory = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [resizableText || isTextareaHidden]);
+  }, [textPhotoColor] && [fontType] && [resizableText]);
 
   return (
     <>
@@ -154,14 +163,14 @@ const CreateStory = () => {
                   <option value="Gill Sans">Clean</option>
                   <option value="cursive">Casual</option>
                   <option value="fantasy">Fancy</option>
-                  <option value="monospace">Clean</option>
+                  <option value="monospace">Monospace</option>
                 </select>
 
                 {/*Select Background Color */}
                 <div className="select-bg">
                   <p>Backgrounds</p>
                   <div className="colors">
-                    {colorsArray.map((color, index) => {
+                    {bgColorsArray.map((color, index) => {
                       return (
                         <div
                           key={index}
@@ -275,19 +284,68 @@ const CreateStory = () => {
                             alt="uploaded image"
                           />
                           {showAddText && !isTextareaHidden && (
-                            <Draggable nodeRef={resizableRef}>
-                              <textarea
-                                ref={resizableRef}
-                                placeholder="Start typing"
-                                className="textarea-on-photo"
-                                onChange={(e) =>
-                                  setResizableText(e.target.value)
-                                }
-                              ></textarea>
-                            </Draggable>
+                            <div ref={resizableRef}>
+                              {/* Text Area on photo */}
+                              <Draggable nodeRef={resizableRef}>
+                                <textarea
+                                  placeholder="Start typing"
+                                  className="textarea-on-photo"
+                                  value={resizableText}
+                                  style={{
+                                    fontFamily: `${fontType}`,
+                                    color: `${textPhotoColor}`,
+                                    caretColor: `${textPhotoColor}`,
+                                  }}
+                                  onChange={(e) =>
+                                    setResizableText(e.target.value)
+                                  }
+                                ></textarea>
+                              </Draggable>
+
+                              {/* Custom photo Text */}
+                              <div className="custom-photo-value">
+                                {/* Font type */}
+                                <select
+                                  name="choice"
+                                  className="select-font px-2"
+                                  onChange={(e) => setFontType(e.target.value)}
+                                >
+                                  <option value="sans-serif">Simple</option>
+                                  <option value="Gill Sans">Clean</option>
+                                  <option value="cursive">Casual</option>
+                                  <option value="fantasy">Fancy</option>
+                                  <option value="monospace">Monospace</option>
+                                </select>
+
+                                {/*Select text color */}
+                                <div className="select-text-color">
+                                  <p>Text Color</p>
+                                  <div className="colors">
+                                    {colorsArray.map((color, index) => {
+                                      return (
+                                        <div
+                                          key={index}
+                                          className={`color ${
+                                            color.value === textPhotoColor &&
+                                            "show-border"
+                                          }`}
+                                          style={{
+                                            backgroundColor: color.value,
+                                          }}
+                                          onClick={() =>
+                                            setTextPhotoColor(color.value)
+                                          }
+                                        ></div>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                           )}
-                          {isTextareaHidden &&
-                            resizableTextArray &&
+
+                          {/* Photo Text */}
+                          {resizableTextArray &&
                             resizableTextArray.map(
                               (item: any, index: number) => {
                                 return (
@@ -306,8 +364,13 @@ const CreateStory = () => {
                                         className="cursor-pointer"
                                         ref={resizableRefs[index]}
                                       >
-                                        <h1>
-                                          {item}
+                                        <h1
+                                          style={{
+                                            color: `${item.color}`,
+                                            fontFamily: `${item.fontType}`,
+                                          }}
+                                        >
+                                          {item.text}
                                         </h1>
                                       </div>
                                     </Resizable>

@@ -9,8 +9,9 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/Facebook" element={<Home />} />
-          <Route path="/Facebook/create-story" element={<CreateStory />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/Facebook/" element={<Home />} />
+          <Route path="/Facebook/create-story/" element={<CreateStory />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Router>

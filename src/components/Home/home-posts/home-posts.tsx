@@ -237,7 +237,10 @@ const HomePosts = () => {
                     }
                   >
                     {showAnimations && (
-                      <div className="animations">
+                      <div
+                        className="animations"
+                        style={{ left: `${isScreen555 && "15px"}` }}
+                      >
                         <Animations reaction={handleReactionState} />
                       </div>
                     )}
@@ -328,9 +331,7 @@ const HomePosts = () => {
                                   className="edit-comment-dialog"
                                   ref={editCommentRef}
                                 >
-                                  <div
-                                    className="edit-comment-option"
-                                  >
+                                  <div className="edit-comment-option">
                                     Edit
                                   </div>
                                   <div className="edit-comment-option">
@@ -368,8 +369,12 @@ const HomePosts = () => {
                   </div>
                   <input
                     type="text"
-                    placeholder="Write a public comment..."
-                    className={`font-thin ${isScreen555 && "text-sm"}`}
+                    placeholder={`${
+                      isScreen555
+                        ? "Write a comment"
+                        : "Write a public comment..."
+                    }`}
+                    className={`${isScreen555 && "text-sm"} font-thin`}
                     value={userComment}
                     onChange={(e: any) => setUserComment(e.target.value)}
                     onClick={() => setPostIndex(index)}
