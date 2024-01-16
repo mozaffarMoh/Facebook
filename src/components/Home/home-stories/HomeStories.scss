@@ -121,10 +121,22 @@
 }
 
 
-    .arrow-left {
-        left: 20%;
-    }
+.arrow-left {
+    left: 20%;
+}
 
-    .arrow-right {
-        right: 20%;
+.arrow-right {
+    right: 20%;
+}
+
+
+@media (max-width : '600px') {
+ .stories{
+    height : 5%;
+ }
+    .story-you,
+    .story-others {
+        width: 100px;
+        height: 180px;
     }
+}
