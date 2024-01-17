@@ -41,10 +41,10 @@ const StoryDetails = () => {
     setResetStory(true);
     dispatch(removeStoryData());
     dispatch(addStoryData(storyData));
+    setLoaded(false);
     setTimeout(() => {
       setResetStory(false);
     }, 1000);
-    setLoaded(false)
   };
 
   /* Press on Esce to close */
@@ -64,6 +64,7 @@ const StoryDetails = () => {
         if (i !== 0) {
           setPauseStory(false);
           setResetStory(true);
+          setLoaded(false);
           dispatch(removeStoryData());
           dispatch(addStoryData(contactsArray[i - 1]));
           setTimeout(() => {
@@ -74,7 +75,6 @@ const StoryDetails = () => {
         }
       }
     }
-    setLoaded(false);
   };
 
   /* Handle Arrow Right */
@@ -84,6 +84,7 @@ const StoryDetails = () => {
         if (i !== contactsArray.length - 1) {
           setPauseStory(false);
           setResetStory(true);
+          setLoaded(false);
           dispatch(removeStoryData());
           dispatch(addStoryData(contactsArray[i + 1]));
           setTimeout(() => {
@@ -92,7 +93,6 @@ const StoryDetails = () => {
         }
       }
     }
-    setLoaded(false);
   };
 
   /* Handle Reaction */
@@ -390,10 +390,14 @@ const StoryDetails = () => {
                       </div>
                     </div>
                   </div>
-                  <div className={`media ${!loaded && "bg-slate-600"}`}>
+                  <div className="media">
+                    {!loaded && <div className="on-load-image"></div>}
                     <img
                       src={story.storyContent}
-                      onLoad={() => setLoaded(true)}
+                      alt=""
+                      onLoad={() => {
+                        setLoaded(true);
+                      }}
                     />
                   </div>
                   {reactionState && (
