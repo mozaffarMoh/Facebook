@@ -19,6 +19,7 @@ import content9 from "../../../assets/images/stories-content/9.jpg";
 
 export const contactsArray = [
   {
+    id:0,
     img: avatar1,
     title: "Friend One",
     active: true,
@@ -27,6 +28,7 @@ export const contactsArray = [
     visible : 'friends',
   },
   {
+    id:1,
     img: avatar2,
     title: "Friend Two",
     active: true,
@@ -35,6 +37,7 @@ export const contactsArray = [
     visible : 'public',
   },
   {
+    id:2,
     img: avatar3,
     title: "Friend Three",
     active: true,
@@ -43,6 +46,7 @@ export const contactsArray = [
     visible : 'public',
   },
   {
+    id:3,
     img: avatar4,
     title: "Friend Four",
     active: false,
@@ -52,6 +56,7 @@ export const contactsArray = [
     visible : 'friends',
   },
   {
+    id:4,
     img: avatar5,
     title: "Friend Five",
     active: false,
@@ -61,6 +66,7 @@ export const contactsArray = [
     visible : 'friends',
   },
   {
+    id:5,
     img: avatar6,
     title: "Friend Six",
     storyContent: content6,
@@ -69,6 +75,7 @@ export const contactsArray = [
     visible : 'public',
   },
   {
+    id:6,
     img: avatar7,
     title: "Friend Seven",
     storyContent: content7,
@@ -77,6 +84,7 @@ export const contactsArray = [
     visible : 'public',
   },
   {
+    id:7,
     img: avatar8,
     title: "Friend Eight",
     storyContent: content8,
@@ -85,6 +93,7 @@ export const contactsArray = [
     visible : 'friends',
   },
   {
+    id:8,
     img: avatar9,
     title: "Friend Nine",
     storyContent: content9,

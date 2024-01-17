@@ -13,6 +13,7 @@ const HomeStories = () => {
   const { isScreen555 } = MediaQuery();
   const [firstElement, setFirstElement] = React.useState(0);
   const [lastElement, setLastElement] = React.useState(3);
+  const [loadedImagesArray, setLoadedImagesArray]: any = React.useState([]);
   const ref = React.useRef(null);
 
   const handlePreviousElement = () => {
@@ -37,6 +38,17 @@ const HomeStories = () => {
     dispatch(removeStoryData());
     dispatch(setShowStoryDetails(true));
     dispatch(addStoryData(storyData));
+  };
+
+  const handleLoadedImage = (id: number) => {
+    if (loadedImagesArray && !loadedImagesArray?.includes(id)) {
+      setLoadedImagesArray((prevArray: any) => {
+        const newArray = [...prevArray, id];
+        console.log(newArray);
+        return newArray;
+      });
+      console.log(loadedImagesArray);
+    }
   };
 
   return (
@@ -106,7 +118,7 @@ const HomeStories = () => {
               ? contactsArray.length
               : lastElement
           )
-          .map((story: any, index) => {
+          .map((story: any, index: number) => {
             return (
               <CSSTransition
                 in={true}
@@ -123,9 +135,16 @@ const HomeStories = () => {
                 >
                   <div className="brightness"></div>
                   <div className="story-image-page z-20">
-                    <img src={story.img} alt="Image" />
+                    <img src={story.img} alt="" />
                   </div>
-                  <img src={story.storyContent} className="story-content" />
+                  {!loadedImagesArray.includes(story.id) && (
+                    <div className="story-content-alt"></div>
+                  )}
+                  <img
+                    src={story.storyContent}
+                    className="story-content"
+                    onLoad={() => handleLoadedImage(story.id)}
+                  />
                   <div className="story-image-title z-20 flex justify-center">
                     <p className="z-20">{story.title}</p>
                   </div>
