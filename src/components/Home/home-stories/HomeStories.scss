@@ -75,7 +75,7 @@
     left: 10px;
 }
 
-.story-image-page img{
+.story-image-page img {
     width: 40px;
     height: 30px;
     border-radius: 50%;
@@ -90,11 +90,13 @@
     color: white;
 }
 
-.story-content-alt{
-    position : absolute;
-    background-color: rgb(12, 12, 44)k;
+.story-content-alt {
+    position: absolute;
+    background-color: rgb(47, 47, 73);
 }
-.story-content, .story-content-alt {
+
+.story-content,
+.story-content-alt {
     width: 120%;
     height: 120%;
     transition: transform .5s ease-in-out;
@@ -133,9 +135,10 @@
 
 
 @media (max-width : '600px') {
- .stories{
-    height : 5%;
- }
+    .stories {
+        height: 5%;
+    }
+
     .story-you,
     .story-others {
         width: 100px;

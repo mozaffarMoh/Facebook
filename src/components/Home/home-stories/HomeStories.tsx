@@ -44,10 +44,8 @@ const HomeStories = () => {
     if (loadedImagesArray && !loadedImagesArray?.includes(id)) {
       setLoadedImagesArray((prevArray: any) => {
         const newArray = [...prevArray, id];
-        console.log(newArray);
         return newArray;
       });
-      console.log(loadedImagesArray);
     }
   };
 
