@@ -27,6 +27,7 @@ const StoryDetails = () => {
   const [pauseStory, setPauseStory] = React.useState(false);
   const [resetStory, setResetStory] = React.useState(false);
   const [reactionState, setReactionState] = React.useState("");
+  const [loaded, setLoaded] = React.useState(false);
 
   /* Handle Close */
   const handleClose = () => {
@@ -43,6 +44,7 @@ const StoryDetails = () => {
     setTimeout(() => {
       setResetStory(false);
     }, 1000);
+    setLoaded(false)
   };
 
   /* Press on Esce to close */
@@ -72,6 +74,7 @@ const StoryDetails = () => {
         }
       }
     }
+    setLoaded(false);
   };
 
   /* Handle Arrow Right */
@@ -89,6 +92,7 @@ const StoryDetails = () => {
         }
       }
     }
+    setLoaded(false);
   };
 
   /* Handle Reaction */
@@ -386,8 +390,11 @@ const StoryDetails = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="media">
-                    <img src={story.storyContent} />
+                  <div className={`media ${!loaded && "bg-slate-600"}`}>
+                    <img
+                      src={story.storyContent}
+                      onLoad={() => setLoaded(true)}
+                    />
                   </div>
                   {reactionState && (
                     <div className="flex justify-between w-48 absolute bottom-3 left-10 text-slate-100">
@@ -395,6 +402,7 @@ const StoryDetails = () => {
                         src={ReactionsIconsArray[0][reactionState]}
                         width={24}
                         height={24}
+                        alt=""
                       />
                       <p>Sent to {story.title}</p>
                     </div>

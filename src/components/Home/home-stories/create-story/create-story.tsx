@@ -100,7 +100,7 @@ const CreateStory = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [textPhotoColor] && [fontType] && [resizableText]);
+  }, [fontType, textPhotoColor, resizableText]);
 
   return (
     <>
