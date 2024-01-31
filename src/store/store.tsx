@@ -1,13 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import showStoryDetailsReducer from "../Slices/showStoryDetails";
 import sendStoryDataReducer from "../Slices/sendStoryData";
-import activeReducer from "../Slices/active"; 
+import activeReducer from "../Slices/active";
+import createNewStoryReducer from "../Slices/createNewStory";
 
 const store = configureStore({
   reducer: {
     showStoryDetails: showStoryDetailsReducer,
     sendStoryData: sendStoryDataReducer,
-    active : activeReducer,
+    active: activeReducer,
+    createNewStory: createNewStoryReducer,
   },
 });
 

@@ -3,13 +3,21 @@ import React from "react";
 import { contactsArray } from "../home-contacts/contactsArray";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { MediaQuery } from "../../MediaQuery";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setShowStoryDetails } from "../../../Slices/showStoryDetails";
 import { addStoryData, removeStoryData } from "../../../Slices/sendStoryData";
 import { Link } from "react-router-dom";
+import { RootType } from "../../../store/store";
 
 const HomeStories = () => {
   const dispatch = useDispatch();
+  const newStory: any = useSelector(
+    (state: RootType) => state.createNewStory.data
+  );
+  const contactsArrayNewStory = [...contactsArray];
+  if (newStory[0]) {
+    contactsArrayNewStory.unshift(newStory[0]);
+  }
   const { isScreen555 } = MediaQuery();
   const [firstElement, setFirstElement] = React.useState(0);
   const [lastElement, setLastElement] = React.useState(3);
@@ -107,7 +115,7 @@ const HomeStories = () => {
       )}
 
       <TransitionGroup className="flex">
-        {contactsArray
+        {(!newStory[0] ? contactsArray : contactsArrayNewStory)
           .slice(
             firstElement >= contactsArray.length - 4
               ? contactsArray.length - 4
@@ -135,14 +143,27 @@ const HomeStories = () => {
                   <div className="story-image-page z-20">
                     <img src={story.img} alt="" />
                   </div>
-                  {!loadedImagesArray.includes(story.id) && (
-                    <div className="story-content-alt"></div>
+                  {story.storyContent ? (
+                    <div>
+                      {!loadedImagesArray.includes(story.id) && (
+                        <div className="story-content-alt"></div>
+                      )}
+                      <img
+                        src={story.storyContent}
+                        className="story-content"
+                        onLoad={() => handleLoadedImage(story.id)}
+                      />
+                    </div>
+                  ) : (
+                    <div
+                      className="story-content flex justify-center items-center"
+                      style={{
+                        backgroundImage: `${story.bgColor && story.bgColor}`,
+                      }}
+                    >
+                      <h1>{story.text}</h1>
+                    </div>
                   )}
-                  <img
-                    src={story.storyContent}
-                    className="story-content"
-                    onLoad={() => handleLoadedImage(story.id)}
-                  />
                   <div className="story-image-title z-20 flex justify-center">
                     <p className="z-20">{story.title}</p>
                   </div>

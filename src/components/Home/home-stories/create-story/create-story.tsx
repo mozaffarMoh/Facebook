@@ -4,18 +4,21 @@ import profilePicture from "../../../../assets/images/header/profile-picture.jpg
 import React from "react";
 import { bgColorsArray } from "./bgColorsArray";
 import { colorsArray } from "./colorsArray";
-import { MediaQuery } from "../../../MediaQuery";
 import { Resizable } from "react-resizable";
 import Draggable from "react-draggable";
+import { useDispatch } from "react-redux";
+import { addNewStory } from "../../../../Slices/createNewStory";
+import { useNavigate } from "react-router-dom";
 
 const CreateStory = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const resizableRef: any = React.useRef(null);
-  const { isScreen1000 } = MediaQuery();
   const [focused, setFocused] = React.useState(false);
   const [showUploadTextDialog, setShowUploadTextDialog] = React.useState(false);
   const [showUploadPhotoDialog, setShowUploadPhtotDialog] =
     React.useState(false);
-  const [photoValue, setPhotoValue] = React.useState<File | null>(null);
+  const [photoValue, setPhotoValue]: any = React.useState(null);
   const [showAddText, setShowAddText] = React.useState(false);
   const [TextareaLabel, setTextareaLabel] = React.useState("Start typing");
   const [TextareaPlaceholder, setTextareaPlaceholder] = React.useState("");
@@ -24,7 +27,9 @@ const CreateStory = () => {
   const [resizableText, setResizableText] = React.useState("");
   const [textareaValue, setTextAreaValue] = React.useState("");
   const [fontType, setFontType] = React.useState("");
-  const [selectBG, setSelectBG] = React.useState("");
+  const [selectBG, setSelectBG] = React.useState(
+    "linear-gradient(to left, rgb(146, 146, 240), rgb(126, 21, 224))"
+  );
   const [textPhotoColor, setTextPhotoColor] = React.useState("");
   const resizableRefs: React.RefObject<HTMLDivElement>[] =
     resizableTextArray.map(() => React.createRef());
@@ -102,131 +107,170 @@ const CreateStory = () => {
     };
   }, [fontType, textPhotoColor, resizableText]);
 
+  /* Share Text Story */
+  const shareTaxtStory = () => {
+    dispatch(
+      addNewStory({
+        img: profilePicture,
+        title: "Your story",
+        text: textareaValue,
+        font: fontType,
+        bgColor: selectBG,
+        active: true,
+        activeText: "just now",
+        visible: "friends",
+      })
+    );
+    discardChanges();
+    navigate("/Facebook");
+  };
+
+  /* Share Photo Story */
+  const sharePhotoStory = () => {
+    dispatch(
+      addNewStory({
+        img: profilePicture,
+        title: "Your story",
+        storyContent: URL.createObjectURL(photoValue),
+        textArray: resizableTextArray,
+        font: fontType,
+        color: textPhotoColor,
+        bgColor: selectBG,
+        active: true,
+        activeText: "just now",
+        visible: "friends",
+      })
+    );
+    discardChanges();
+    navigate("/Facebook");
+  };
+
   return (
     <>
       <Header />
       <div className="create-story-page">
         {/* Text */}
-        {!isScreen1000 && (
-          <div
-            className={`story-text overflow-x-hidden ${
-              focused ? "overflow-y-auto" : "overflow-y-hidden"
-            }`}
-            onMouseEnter={() => setFocused(true)}
-            onMouseLeave={() => setFocused(false)}
-          >
-            <div className="flex w-80 justify-between py-5">
-              <h1>Your Story</h1>
-              <div className="icon-circle">
-                <i
-                  className="create-story-icons setting-icon"
-                  style={{ backgroundPosition: "0px -553px" }}
-                ></i>
-              </div>
+
+        <div
+          className={`story-text overflow-x-hidden ${
+            focused ? "overflow-y-auto" : "overflow-y-hidden"
+          }`}
+          onMouseEnter={() => setFocused(true)}
+          onMouseLeave={() => setFocused(false)}
+        >
+          <div className="flex w-80 justify-between py-5">
+            <h1>Your Story</h1>
+            <div className="icon-circle">
+              <i
+                className="create-story-icons setting-icon"
+                style={{ backgroundPosition: "0px -553px" }}
+              ></i>
             </div>
-            <div className="flex items-center w-80">
-              <div className="profile-section-icon profile-icon w-14 h-14 hover:opacity-90">
-                <img src={profilePicture} alt="profile" />
-              </div>
-              <p>Mozaffar Mohammad</p>
-            </div>
-            <div className="splitter-line"></div>
-            {/* TEXT STORY */}
-            {showUploadTextDialog && (
-              <div className="type-story p-3">
-                {/* Label and Textarea */}
-                <label
-                  className={` start-typing ${
-                    TextareaPlaceholder && "moveLabelToTop"
-                  }`}
-                  htmlFor="textareaID"
-                >
-                  {TextareaLabel}
-                </label>
-                <textarea
-                  className="text-input py-2 pt-5 px-4 mt-3"
-                  id="textareaID"
-                  placeholder={TextareaPlaceholder}
-                  onFocus={inputTextOnFocus}
-                  onBlur={inputTextOnBlur}
-                  value={textareaValue}
-                  onChange={(e) => setTextAreaValue(e.target.value)}
-                ></textarea>
-
-                {/* Font type */}
-                <select
-                  name="choice"
-                  className="select-font px-2"
-                  onChange={(e) => setFontType(e.target.value)}
-                >
-                  <option value="sans-serif">Simple</option>
-                  <option value="Gill Sans">Clean</option>
-                  <option value="cursive">Casual</option>
-                  <option value="fantasy">Fancy</option>
-                  <option value="monospace">Monospace</option>
-                </select>
-
-                {/*Select Background Color */}
-                <div className="select-bg">
-                  <p>Backgrounds</p>
-                  <div className="colors">
-                    {bgColorsArray.map((color, index) => {
-                      return (
-                        <div
-                          key={index}
-                          className={`color ${
-                            color.value === selectBG && "show-border"
-                          }`}
-                          style={{ backgroundImage: color.value }}
-                          onClick={() => setSelectBG(color.value)}
-                        ></div>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* buttons */}
-                <div className="buttons">
-                  <button className="discard-button" onClick={discardChanges}>
-                    Discard
-                  </button>
-                  <button className="share-button">Share to story</button>
-                </div>
-              </div>
-            )}
-            {/* PHOTO STORY */}
-            {showUploadPhotoDialog && (
-              <div className="photo-story">
-                {/* Add Text */}
-                <div className="add-text" onClick={toggleTextareaVisibility}>
-                  <div className="Aa-icon">
-                    <p>Aa</p>
-                  </div>
-                  <p>Add Text</p>
-                </div>
-
-                {/* buttons */}
-                <div className="buttons">
-                  <button className="discard-button" onClick={discardChanges}>
-                    Discard
-                  </button>
-                  <button className="share-button">Share to story</button>
-                </div>
-              </div>
-            )}
           </div>
-        )}
+          <div className="flex items-center w-80">
+            <div className="profile-section-icon profile-icon w-14 h-14 hover:opacity-90">
+              <img src={profilePicture} alt="profile" />
+            </div>
+            <p>Mozaffar Mohammad</p>
+          </div>
+          <div className="splitter-line"></div>
+          {/* TEXT STORY */}
+          {showUploadTextDialog && (
+            <div className="type-story p-3">
+              {/* Label and Textarea */}
+              <label
+                className={`start-typing ${
+                  TextareaPlaceholder && "moveLabelToTop"
+                }`}
+                htmlFor="textareaID"
+              >
+                {TextareaLabel}
+              </label>
+              <textarea
+                className="text-input py-2 pt-5 px-4 mt-3"
+                id="textareaID"
+                placeholder={TextareaPlaceholder}
+                onFocus={inputTextOnFocus}
+                onBlur={inputTextOnBlur}
+                value={textareaValue}
+                onChange={(e) => setTextAreaValue(e.target.value)}
+              ></textarea>
+
+              {/* Font type */}
+              <select
+                name="choice"
+                className="select-font px-2"
+                onChange={(e) => setFontType(e.target.value)}
+              >
+                <option value="sans-serif">Simple</option>
+                <option value="Gill Sans">Clean</option>
+                <option value="cursive">Casual</option>
+                <option value="fantasy">Fancy</option>
+                <option value="monospace">Monospace</option>
+              </select>
+
+              {/*Select Background Color */}
+              <div className="select-bg">
+                <p>Backgrounds</p>
+                <div className="colors">
+                  {bgColorsArray.map((color, index) => {
+                    return (
+                      <div
+                        key={index}
+                        className={`color ${
+                          color.value === selectBG && "show-border"
+                        }`}
+                        style={{ backgroundImage: color.value }}
+                        onClick={() => setSelectBG(color.value)}
+                      ></div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* buttons */}
+              <div className="buttons">
+                <button className="discard-button" onClick={discardChanges}>
+                  Discard
+                </button>
+                <button className="share-button" onClick={shareTaxtStory}>
+                  Share to story
+                </button>
+              </div>
+            </div>
+          )}
+          {/* PHOTO STORY */}
+          {showUploadPhotoDialog && (
+            <div className="photo-story">
+              {/* Add Text */}
+              <div className="add-text" onClick={toggleTextareaVisibility}>
+                <div className="Aa-icon">
+                  <p>Aa</p>
+                </div>
+                <p>Add Text</p>
+              </div>
+
+              {/* buttons */}
+              <div className="buttons">
+                <button className="discard-button" onClick={discardChanges}>
+                  Discard
+                </button>
+                <button className="share-button" onClick={sharePhotoStory}>
+                  Share to story
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
 
         {/* Actions */}
         <div
           className={`story-actions `}
-          style={{ width: `${isScreen1000 && "100%"}` }}
         >
           {/* Upload Text and photo */}
           {(!showUploadTextDialog || !showUploadPhotoDialog) && (
             <div
               className={`story-actions `}
-              style={{ width: `${isScreen1000 && "100%"}` }}
             >
               <label htmlFor="selectImage" className="upload upload-photo">
                 <div className="icon-circle">
