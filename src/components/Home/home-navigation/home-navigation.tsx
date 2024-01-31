@@ -198,7 +198,7 @@ const HomeNavigation = () => {
               <img
                 className="rounded-lg"
                 alt=""
-                src="https://scontent-bru2-1.xx.fbcdn.net/v/t39.2081-6/42630609_2166936443330818_3464735768197464064_n.png?stp=c6.6.31.31a_dst-png_p36x36&amp;_nc_cat=1&amp;ccb=1-7&amp;_nc_sid=ed3f67&amp;_nc_ohc=-nXbSff7nRsAX_yuxlK&amp;_nc_ht=scontent-bru2-1.xx&amp;oh=00_AfAZ1MOalDvk_PawwV8u4yHd8HieVbtzek8GLcrSasXzbA&amp;oe=6586422F"
+                src="https://scontent-bru2-1.xx.fbcdn.net/v/t39.2081-6/42630609_2166936443330818_3464735768197464064_n.png?stp=c6.6.31.31a_dst-png_p36x36&amp;_nc_cat=1&amp;ccb=1-7&amp;_nc_sid=ed3f67&amp;_nc_ohc=JckbVFX3OoUAX9AaoIy&amp;_nc_ht=scontent-bru2-1.xx&amp;oh=00_AfCNNn2OrTEEHTl4sUWXFwl4GYZ4fbjmco6xFFXUwZXzEQ&amp;oe=65BF9B6F"
               />
               <h4>8 Ball Pool</h4>
             </div>
@@ -207,7 +207,7 @@ const HomeNavigation = () => {
               <img
                 className="rounded-lg"
                 alt=""
-                src="https://scontent-ams2-1.xx.fbcdn.net/v/t39.2081-6/22088589_1654976451201719_5191478939503034368_n.png?stp=c6.6.31.31a_dst-png_p36x36&amp;_nc_cat=1&amp;ccb=1-7&amp;_nc_sid=ed3f67&amp;_nc_ohc=uStfh4UIvrgAX8YBQux&amp;_nc_ht=scontent-ams2-1.xx&amp;oh=00_AfBXm9OTFBDnCLeYd_0zNUF-LnnHpifN_Wu-HwTMt-Mezw&amp;oe=6585EC42"
+                src="https://scontent-bru2-1.xx.fbcdn.net/v/t39.2081-6/22088589_1654976451201719_5191478939503034368_n.png?stp=c6.6.31.31a_dst-png_p36x36&amp;_nc_cat=1&amp;ccb=1-7&amp;_nc_sid=ed3f67&amp;_nc_ohc=QR7p2lNkzk0AX8UXdmE&amp;_nc_ht=scontent-bru2-1.xx&amp;oh=00_AfBe63LCh8mWYNK8n4Ciuwd_K61tlAYELZi7zCWG7rLXOQ&amp;oe=65BF4582"
               />
               <h4>Candy Crush</h4>
             </div>
@@ -216,7 +216,7 @@ const HomeNavigation = () => {
               <img
                 className="rounded-lg"
                 alt=""
-                src="https://scontent-ams2-1.xx.fbcdn.net/v/t39.2081-6/38857289_967432326791829_6476944985995345920_n.png?stp=c6.6.31.31a_dst-png_p36x36&amp;_nc_cat=1&amp;ccb=1-7&amp;_nc_sid=ed3f67&amp;_nc_ohc=Lp5jtb49odAAX--VjvL&amp;_nc_ht=scontent-ams2-1.xx&amp;oh=00_AfDZSJ6ynL2f2qUOC3i_q6hV9vABahrhflDso7wybz_d6g&amp;oe=65866400"
+                src="https://scontent-bru2-1.xx.fbcdn.net/v/t39.2081-6/38857289_967432326791829_6476944985995345920_n.png?stp=c6.6.31.31a_dst-png_p36x36&amp;_nc_cat=1&amp;ccb=1-7&amp;_nc_sid=ed3f67&amp;_nc_ohc=EDoOt32Zbe4AX9qQmFu&amp;_nc_ht=scontent-bru2-1.xx&amp;oh=00_AfCXdntXaMcKx6JG47Q0tf_7oMAT37a1RdFSB6BPlBzrNw&amp;oe=65BFBD40"
               />
               <h4>Soccer Stars</h4>
             </div>
@@ -225,7 +225,7 @@ const HomeNavigation = () => {
               <img
                 className="rounded-lg"
                 alt=""
-                src="https://scontent-ams2-1.xx.fbcdn.net/v/t39.2081-6/27045397_10155399661101229_4188312396068028416_n.png?stp=c6.6.31.31a_dst-png_p36x36&amp;_nc_cat=1&amp;ccb=1-7&amp;_nc_sid=ed3f67&amp;_nc_ohc=1YWVNkUjHzwAX_8yRpV&amp;_nc_ht=scontent-ams2-1.xx&amp;oh=00_AfAcRsmLsvxWEUlvhrdyMYyDIp_nzElaRm2HTjF6ehnPsA&amp;oe=6584FD4E"
+                src="https://scontent-bru2-1.xx.fbcdn.net/v/t39.2081-6/27045397_10155399661101229_4188312396068028416_n.png?stp=c6.6.31.31a_dst-png_p36x36&amp;_nc_cat=1&amp;ccb=1-7&amp;_nc_sid=ed3f67&amp;_nc_ohc=xDVn8tox3BUAX_LaAB_&amp;_nc_ht=scontent-bru2-1.xx&amp;oh=00_AfDQWro7aTX3PHaVh37YA6fAs_z56ibiqn0eReSw2sq3RQ&amp;oe=65C050CE"
               />
               <h4>Texas HoldEm Poker</h4>
             </div>
