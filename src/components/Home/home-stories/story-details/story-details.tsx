@@ -22,6 +22,13 @@ const StoryDetails = () => {
   const storyDataReceived: any = useSelector(
     (state: RootType) => state.sendStoryData.data
   );
+  const newStory: any = useSelector(
+    (state: RootType) => state.createNewStory.data
+  );
+  const contactsArrayNewStory = [...contactsArray];
+  if (newStory[0]) {
+    contactsArrayNewStory.unshift(newStory[0]);
+  }
   const { isScreen555, isScreen900 } = MediaQuery();
   const [muteVoice, setMuteVoice] = React.useState(false);
   const [pauseStory, setPauseStory] = React.useState(false);
@@ -59,14 +66,14 @@ const StoryDetails = () => {
 
   /* Handle Arrow Left */
   const handleArrowLeft = () => {
-    for (let i = 0; i < contactsArray.length; i++) {
-      if (contactsArray[i] === storyDataReceived[0]) {
+    for (let i = 0; i < contactsArrayNewStory.length; i++) {
+      if (contactsArrayNewStory[i] === storyDataReceived[0]) {
         if (i !== 0) {
           setPauseStory(false);
           setResetStory(true);
           setLoaded(false);
           dispatch(removeStoryData());
-          dispatch(addStoryData(contactsArray[i - 1]));
+          dispatch(addStoryData(contactsArrayNewStory[i - 1]));
           setTimeout(() => {
             setResetStory(false);
           }, 1000);
@@ -79,14 +86,14 @@ const StoryDetails = () => {
 
   /* Handle Arrow Right */
   const handleArrowRight = () => {
-    for (let i = 0; i < contactsArray.length; i++) {
-      if (contactsArray[i] === storyDataReceived[0]) {
-        if (i !== contactsArray.length - 1) {
+    for (let i = 0; i < contactsArrayNewStory.length; i++) {
+      if (contactsArrayNewStory[i] === storyDataReceived[0]) {
+        if (i !== contactsArrayNewStory.length - 1) {
           setPauseStory(false);
           setResetStory(true);
           setLoaded(false);
           dispatch(removeStoryData());
-          dispatch(addStoryData(contactsArray[i + 1]));
+          dispatch(addStoryData(contactsArrayNewStory[i + 1]));
           setTimeout(() => {
             setResetStory(false);
           }, 1000);
@@ -153,7 +160,7 @@ const StoryDetails = () => {
 
             <h1 className="text-sm font-extrabold">All Stories</h1>
 
-            {contactsArray.map((item, index) => {
+            {contactsArrayNewStory.map((item, index) => {
               return (
                 <div
                   className={`contacts-item flex items-center h-16 ${
@@ -208,7 +215,7 @@ const StoryDetails = () => {
 
           {/* Arrow Left */}
           <div className="w-2/5 left-section" onClick={handleArrowLeft}>
-            {!(contactsArray[0] === storyDataReceived[0]) && (
+            {!(contactsArrayNewStory[0] === storyDataReceived[0]) && (
               <div
                 className={`arrow-circle arrow-left ${
                   isScreen555 && "left-4 "
@@ -391,7 +398,26 @@ const StoryDetails = () => {
                     </div>
                   </div>
                   <div className="media">
-                    {!loaded && <div className="on-load-image"></div>}
+                    {!loaded && (
+                      <div
+                        className="on-load-image"
+                        style={{
+                          backgroundImage: story.bgColor,
+                        }}
+                      >
+                        {" "}
+                        {story.text && (
+                          <h1
+                            style={{
+                              color: "white",
+                              fontSize: "30px",
+                            }}
+                          >
+                            {story.text}
+                          </h1>
+                        )}
+                      </div>
+                    )}
                     <img
                       src={story.storyContent}
                       alt=""
@@ -399,6 +425,26 @@ const StoryDetails = () => {
                         setLoaded(true);
                       }}
                     />
+                    {story.textArray &&
+                      story.textArray.map((text: any, index: number) => {
+                        return (
+                          <h1
+                            key={index}
+                            color={text.color}
+                            style={{
+                              fontFamily: text.fontType,
+                              color: text.color,
+                              position: "absolute",
+                              top: `${index + 4}0%`,
+                              left: "25%",
+                              zIndex: "100",
+                              fontSize: "30px",
+                            }}
+                          >
+                            {text.text}
+                          </h1>
+                        );
+                      })}
                   </div>
                   {reactionState && (
                     <div className="flex justify-between w-48 absolute bottom-3 left-10 text-slate-100">
@@ -419,7 +465,8 @@ const StoryDetails = () => {
           {/* Arrow Right */}
           <div className="w-2/5 right-section" onClick={handleArrowRight}>
             {!(
-              contactsArray[contactsArray.length - 1] === storyDataReceived[0]
+              contactsArrayNewStory[contactsArrayNewStory.length - 1] ===
+              storyDataReceived[0]
             ) && (
               <div
                 className={`arrow-circle arrow-right ${

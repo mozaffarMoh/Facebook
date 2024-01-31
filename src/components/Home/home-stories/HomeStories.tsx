@@ -153,6 +153,25 @@ const HomeStories = () => {
                         className="story-content"
                         onLoad={() => handleLoadedImage(story.id)}
                       />
+                      {story.textArray &&
+                        story.textArray.map((text: any, index: number) => {
+                          return (
+                            <h1
+                              key={index}
+                              color={text.color}
+                              style={{
+                                fontFamily: text.fontType,
+                                color: text.color,
+                                position: "absolute",
+                                top: `${index + 4}0%`,
+                                left: "25%",
+                                zIndex: "100",
+                              }}
+                            >
+                              {text.text}
+                            </h1>
+                          );
+                        })}
                     </div>
                   ) : (
                     <div

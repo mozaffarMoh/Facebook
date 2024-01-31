@@ -13,7 +13,8 @@
 .story-section .left-section,
 .story-footer,
 .story-footer .footer-input,
-.story-footer .footer-animations {
+.story-footer .footer-animations,
+.media .on-load-image {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -176,6 +177,7 @@
                     width: 350px;
                     height: 100%;
                     margin-left: 5%;
+                    padding: 10px;
                 }
             }
 
