@@ -10,6 +10,7 @@ import ToolTip from "../../Tooltip/Tooltip";
 
 const HomePosts = () => {
   const { isScreen555, isScreen666 } = MediaQuery();
+  const [newPostsArray, setNewPostsArray]: any = React.useState(postsArray);
   const [reactionState, setReactionState] = React.useState("");
   const [showAnimations, setShowAnimations] = React.useState(false);
   const [postIndex, setPostIndex] = React.useState(0);
@@ -50,18 +51,25 @@ const HomePosts = () => {
   }, [editCommentDialog]);
 
   /* Change Reaction State */
-  const handleReactionState = (value: any) => {
-    if (reactionState === "") {
-      setReactionState("Like");
-    }
-    if (value !== reactionState) {
-      setReactionState(value);
-    } else {
-      setReactionState("");
-    }
-    setTimeout(() => {
-      setShowAnimations(false);
-    }, 300);
+  const handleReactionState = (index: number) => {
+    return (value: string) => {
+      if (reactionState === "") {
+        setReactionState("Like");
+      }
+      if (value !== reactionState) {
+        setReactionState(value);
+      } else {
+        setReactionState("");
+      }
+      setNewPostsArray((prevArray: any) => {
+        const newArray = [...prevArray];
+        newArray[index].currentReaction = value;
+        return newArray;
+      });
+      setTimeout(() => {
+        setShowAnimations(false);
+      }, 300);
+    };
   };
 
   /* Default press is Like */
@@ -105,7 +113,7 @@ const HomePosts = () => {
   React.useEffect(() => {
     const handleEnterPress = (event: any) => {
       if (event.keyCode === 13) {
-        addComment(postsArray[postIndex].comments);
+        addComment(newPostsArray[postIndex].comments);
       }
     };
     document.addEventListener("keydown", handleEnterPress);
@@ -145,7 +153,7 @@ const HomePosts = () => {
 
       {/* Posts */}
       <div className="posts">
-        {postsArray.map((post: any, index) => {
+        {newPostsArray.map((post: any, index: number) => {
           return (
             <div className="post pt-3" key={index}>
               {/* Header */}
@@ -241,11 +249,11 @@ const HomePosts = () => {
                         className="animations"
                         style={{ left: `${isScreen555 && "15px"}` }}
                       >
-                        <Animations reaction={handleReactionState} />
+                        <Animations reaction={handleReactionState(index)} />
                       </div>
                     )}
 
-                    {reactionState === "" ? (
+                    {post.currentReaction === "" ? (
                       <div
                         className="flex justify-center items-center"
                         onClick={likeButton}
@@ -263,12 +271,12 @@ const HomePosts = () => {
                         onClick={disableReaction}
                       >
                         <img
-                          src={ReactionsIconsArray[0][reactionState]}
+                          src={ReactionsIconsArray[0][post.currentReaction]}
                           width={24}
                           height={24}
                         />
                         <p className={`${changeReactionColor()}`}>
-                          {reactionState}
+                          {post.currentReaction}
                         </p>{" "}
                       </div>
                     )}

@@ -25,6 +25,7 @@ export const postsArray = [
     commentsNum: 65,
     shareNum: "11",
     comments: [],
+    currentReaction : "",
   },
   {
     pageImg: pageImg2,
@@ -42,6 +43,7 @@ export const postsArray = [
     commentsNum: 120,
     shareNum: "70",
     comments: [],
+    currentReaction : "",
   },
   {
     pageImg: pageImg3,
@@ -60,6 +62,7 @@ export const postsArray = [
     commentsNum: 16,
     shareNum: "2",
     comments: [],
+    currentReaction : "",
   },
   {
     pageImg: pageImg4,
@@ -78,5 +81,6 @@ export const postsArray = [
     commentsNum: 32,
     shareNum: "9",
     comments: [],
+    currentReaction : "",
   },
 ];

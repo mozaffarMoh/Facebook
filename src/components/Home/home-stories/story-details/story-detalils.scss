@@ -116,8 +116,9 @@
                 position: absolute;
                 width: 95%;
                 margin-left: 7%;
-                top : 20px;
+                top: 20px;
                 padding: 0px 20px;
+                z-index: 100;
 
                 .story-header {
                     img {
@@ -164,6 +165,10 @@
                     width: 400px;
                     border-radius: 10px;
                     height: 100%;
+
+                    img {
+                        border-radius: 20px !important;
+                    }
                 }
 
                 .on-load-image {
@@ -178,6 +183,10 @@
                     height: 100%;
                     margin-left: 5%;
                     padding: 10px;
+                }
+
+                .media .on-load-image {
+                    margin-left: 25px;
                 }
             }
 
@@ -227,7 +236,7 @@
 
         .story-header-with-bar {
             width: 370px !important;
-            z-index: 0 !important;
+            z-index: 10 !important;
         }
     }
 
