@@ -214,18 +214,24 @@ const StoryDetails = () => {
           </div>
 
           {/* Arrow Left */}
-          <div className="w-2/5 left-section" onClick={handleArrowLeft}>
-            {!(contactsArrayNewStory[0] === storyDataReceived[0]) && (
-              <div
-                className={`arrow-circle arrow-left ${
-                  isScreen555 && "left-4 "
-                }`}
-              >
-                <svg viewBox="0 0 24 24" width="24" height="24" fill="black">
-                  <path d="M14.791 5.207 8 12l6.793 6.793a1 1 0 1 1-1.415 1.414l-7.5-7.5a1 1 0 0 1 0-1.414l7.5-7.5a1 1 0 1 1 1.415 1.414z"></path>
-                </svg>
-              </div>
-            )}
+          <div
+            className="w-2/5 left-section"
+            style={{
+              visibility: `${
+                contactsArrayNewStory[0] === storyDataReceived[0]
+                  ? "hidden"
+                  : "visible"
+              }`,
+            }}
+            onClick={handleArrowLeft}
+          >
+            <div
+              className={`arrow-circle arrow-left ${isScreen555 && "left-4"}`}
+            >
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="black">
+                <path d="M14.791 5.207 8 12l6.793 6.793a1 1 0 1 1-1.415 1.414l-7.5-7.5a1 1 0 0 1 0-1.414l7.5-7.5a1 1 0 1 1 1.415 1.414z"></path>
+              </svg>
+            </div>
           </div>
 
           {/* Story Slide */}
@@ -233,7 +239,7 @@ const StoryDetails = () => {
             {storyDataReceived.map((story: any, index: number) => {
               return (
                 <div className="story-media" key={index}>
-                  <div className="story-header-with-bar px-2">
+                  <div className='story-header-with-bar px-2'>
                     <ProgressBar
                       pause={pauseStory}
                       reset={resetStory}
@@ -463,21 +469,27 @@ const StoryDetails = () => {
           </div>
 
           {/* Arrow Right */}
-          <div className="w-2/5 right-section" onClick={handleArrowRight}>
-            {!(
-              contactsArrayNewStory[contactsArrayNewStory.length - 1] ===
-              storyDataReceived[0]
-            ) && (
-              <div
-                className={`arrow-circle arrow-right ${
-                  isScreen555 && "right-4 "
-                }`}
-              >
-                <svg viewBox="0 0 24 24" width="24" height="24" fill="black">
-                  <path d="M9.209 5.207 16 12l-6.791 6.793a1 1 0 1 0 1.415 1.414l7.5-7.5a1 1 0 0 0 0-1.414l-7.5-7.5a1 1 0 1 0-1.415 1.414z"></path>
-                </svg>
-              </div>
-            )}
+          <div
+            className="w-2/5 right-section"
+            onClick={handleArrowRight}
+            style={{
+              visibility: `${
+                contactsArrayNewStory[contactsArrayNewStory.length - 1] ===
+                storyDataReceived[0]
+                  ? "hidden"
+                  : "visible"
+              }`,
+            }}
+          >
+            <div
+              className={`arrow-circle arrow-right ${
+                isScreen555 && "right-4 "
+              }`}
+            >
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="black">
+                <path d="M9.209 5.207 16 12l-6.791 6.793a1 1 0 1 0 1.415 1.414l7.5-7.5a1 1 0 0 0 0-1.414l-7.5-7.5a1 1 0 1 0-1.415 1.414z"></path>
+              </svg>
+            </div>
           </div>
         </div>
 

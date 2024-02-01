@@ -115,9 +115,9 @@
             .story-header-with-bar {
                 position: absolute;
                 width: 95%;
-                margin-top: 10px;
                 margin-left: 7%;
-                z-index: 50;
+                top : 20px;
+                padding: 0px 20px;
 
                 .story-header {
                     img {
@@ -218,6 +218,16 @@
                     margin-left: 10px;
                 }
             }
+        }
+    }
+
+
+    /* Story Header Responsive */
+    @media (max-width : '550px') {
+
+        .story-header-with-bar {
+            width: 370px !important;
+            z-index: 0 !important;
         }
     }
 
