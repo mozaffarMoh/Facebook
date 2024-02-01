@@ -11,7 +11,6 @@ import ToolTip from "../../Tooltip/Tooltip";
 const HomePosts = () => {
   const { isScreen555, isScreen666 } = MediaQuery();
   const [newPostsArray, setNewPostsArray]: any = React.useState(postsArray);
-  const [reactionState, setReactionState] = React.useState("");
   const [showAnimations, setShowAnimations] = React.useState(false);
   const [postIndex, setPostIndex] = React.useState(0);
   const [userComment, setUserComment] = React.useState("");
@@ -53,19 +52,13 @@ const HomePosts = () => {
   /* Change Reaction State */
   const handleReactionState = (index: number) => {
     return (value: string) => {
-      if (reactionState === "") {
-        setReactionState("Like");
-      }
-      if (value !== reactionState) {
-        setReactionState(value);
-      } else {
-        setReactionState("");
-      }
+      const current = newPostsArray[index].currentReaction;
       setNewPostsArray((prevArray: any) => {
         const newArray = [...prevArray];
-        newArray[index].currentReaction = value;
+        newArray[index].currentReaction = current !== value ? value : "";
         return newArray;
       });
+
       setTimeout(() => {
         setShowAnimations(false);
       }, 300);
@@ -73,24 +66,32 @@ const HomePosts = () => {
   };
 
   /* Default press is Like */
-  const likeButton = () => {
-    setReactionState("Like");
+  const likeButton = (index: number) => {
+    setNewPostsArray((prevArray: any) => {
+      const newArray = [...prevArray];
+      newArray[index].currentReaction = "Like";
+      return newArray;
+    });
     setShowAnimations(false);
   };
 
   /* Disable Reaction */
-  const disableReaction = () => {
-    setReactionState("");
+  const disableReaction = (index: number) => {
+    setNewPostsArray((prevArray: any) => {
+      const newArray = [...prevArray];
+      newArray[index].currentReaction = "";
+      return newArray;
+    });
     setShowAnimations(false);
   };
 
   /* Change Reaction Color */
-  const changeReactionColor = () => {
-    if (reactionState === "") {
+  const changeReactionColor = (currentReaction: string) => {
+    if (currentReaction === "") {
       return "text-slate-600";
-    } else if (reactionState === "Like") {
+    } else if (currentReaction === "Like") {
       return "text-blue-600 ml-2 p-0.5";
-    } else if (reactionState === "Love") {
+    } else if (currentReaction === "Love") {
       return "text-red-500 ml-2 p-0.5";
     } else {
       return "text-yellow-500 ml-2 p-0.5";
@@ -214,7 +215,7 @@ const HomePosts = () => {
                     )}
 
                     <p className="ml-1">
-                      {reactionState
+                      {newPostsArray[index].currentReaction
                         ? post.reactions.num + 1
                         : post.reactions.num}
                     </p>
@@ -256,26 +257,30 @@ const HomePosts = () => {
                     {post.currentReaction === "" ? (
                       <div
                         className="flex justify-center items-center"
-                        onClick={likeButton}
+                        onClick={() => likeButton(index)}
                       >
                         <i
                           className="reactions-icon"
                           style={{ backgroundPosition: "0px -760px" }}
-                          onClick={likeButton}
+                          onClick={() => likeButton(index)}
                         ></i>
-                        <p onClick={likeButton}>Like</p>
+                        <p onClick={() => likeButton(index)}>Like</p>
                       </div>
                     ) : (
                       <div
                         className="flex justify-center items-center"
-                        onClick={disableReaction}
+                        onClick={() => disableReaction(index)}
                       >
                         <img
                           src={ReactionsIconsArray[0][post.currentReaction]}
                           width={24}
                           height={24}
                         />
-                        <p className={`${changeReactionColor()}`}>
+                        <p
+                          className={`${changeReactionColor(
+                            post.currentReaction
+                          )}`}
+                        >
                           {post.currentReaction}
                         </p>{" "}
                       </div>
