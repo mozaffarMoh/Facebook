@@ -114,7 +114,7 @@ const HomeStories = () => {
         </Link>
       )}
 
-      <TransitionGroup className="flex">
+      <TransitionGroup className="flex toOver">
         {(!newStory[0] ? contactsArray : contactsArrayNewStory)
           .slice(
             firstElement >= contactsArray.length - 4
@@ -141,7 +141,7 @@ const HomeStories = () => {
                 >
                   <div className="brightness"></div>
                   <div className="story-image-page z-20">
-                    <img src={story.img} alt="" />
+                    <img src={story.img} alt="" loading="lazy" />
                   </div>
                   {story.storyContent ? (
                     <div>

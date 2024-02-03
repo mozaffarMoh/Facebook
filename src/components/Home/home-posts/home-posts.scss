@@ -26,7 +26,7 @@
     flex-direction: column;
     justify-content: flex-start;
     width: 70%;
-    height: 93%;
+    height: fit-content;
     border-radius: 15px;
 }
 
@@ -99,6 +99,10 @@
     cursor: pointer;
 }
 
+.post-header {
+    height: 60px;
+}
+
 .post-header img {
     width: 43px;
     height: 43px;
@@ -128,6 +132,10 @@
     border-radius: 50%;
     background-color: whitesmoke;
     cursor: pointer
+}
+
+.post-text {
+    width: 100%;
 }
 
 .post-media {
@@ -222,7 +230,7 @@
     border-radius: 10px;
     padding: 5px;
     background-color: white;
-    box-shadow: 5px 5px 15px black;
+    box-shadow: 5px 5px 10px grey;
     font-size: 13px;
 
     .edit-comment-option {
@@ -240,5 +248,20 @@
         position: absolute;
         bottom: -10px;
         left: 50%;
+    }
+}
+
+
+
+
+/* Responsive */
+
+@media (max-width : 470px) {
+    .reactions-button {
+        width: 35% !important;
+
+        p {
+            font-size: 12px;
+        }
     }
 }

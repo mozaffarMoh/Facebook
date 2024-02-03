@@ -1,4 +1,5 @@
 export const bgColorsArray = [
+  { value: "linear-gradient(white, white)" },
   { value: "linear-gradient(to top left, grey, white" },
   { value: "linear-gradient(to top left, blue, yellow" },
   { value: "linear-gradient(to top left, green, red" },

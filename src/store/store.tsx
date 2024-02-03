@@ -3,6 +3,7 @@ import showStoryDetailsReducer from "../Slices/showStoryDetails";
 import sendStoryDataReducer from "../Slices/sendStoryData";
 import activeReducer from "../Slices/active";
 import createNewStoryReducer from "../Slices/createNewStory";
+import createNewPostReducer from "../Slices/createNewPost";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     sendStoryData: sendStoryDataReducer,
     active: activeReducer,
     createNewStory: createNewStoryReducer,
+    createNewPost : createNewPostReducer
   },
 });
 

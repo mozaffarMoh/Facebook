@@ -239,7 +239,7 @@ const StoryDetails = () => {
             {storyDataReceived.map((story: any, index: number) => {
               return (
                 <div className="story-media" key={index}>
-                  <div className='story-header-with-bar px-2'>
+                  <div className="story-header-with-bar px-2">
                     <ProgressBar
                       pause={pauseStory}
                       reset={resetStory}
@@ -430,6 +430,7 @@ const StoryDetails = () => {
                       onLoad={() => {
                         setLoaded(true);
                       }}
+                      loading="lazy"
                     />
                     {story.textArray &&
                       story.textArray.map((text: any, index: number) => {

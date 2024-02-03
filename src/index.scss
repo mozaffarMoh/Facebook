@@ -49,3 +49,37 @@ a {
     opacity: 0;
     transition: opacity .5s linear;
 }
+
+
+.flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flexBetween {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.flexCenterColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.flexCenterColumnStartItems {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.flexStart {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}

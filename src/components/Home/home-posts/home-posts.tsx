@@ -7,8 +7,13 @@ import Animations from "../../Animations/Animations";
 import React from "react";
 import { ReactionsIconsArray } from "./ReactionsIconsArray";
 import ToolTip from "../../Tooltip/Tooltip";
+import { RootType } from "../../../store/store";
+import { useSelector } from "react-redux";
 
-const HomePosts = () => {
+const HomePosts = ({ setShowBrightness }: any) => {
+  const createPostsArray = useSelector(
+    (state: RootType) => state.createNewPost.data
+  );
   const { isScreen555, isScreen666 } = MediaQuery();
   const [newPostsArray, setNewPostsArray]: any = React.useState(postsArray);
   const [showAnimations, setShowAnimations] = React.useState(false);
@@ -34,6 +39,19 @@ const HomePosts = () => {
   ];
   isScreen666 && createPostNavigation.pop();
 
+  /* Show Create post and show brightness */
+  const handleCreatePost = () => {
+    setShowBrightness(true);
+  };
+
+  /* Add New Post */
+  React.useEffect(() => {
+    const newPost = createPostsArray[createPostsArray.length - 1];
+    if (newPost && !newPostsArray.includes(newPost)) {
+      setNewPostsArray((prevArray: any) => [newPost, ...prevArray]);
+    }
+  }, [createPostsArray]);
+
   /* Close Dialog when click outside of it */
   React.useEffect(() => {
     const handleClickOutside = (event: any) => {
@@ -55,7 +73,11 @@ const HomePosts = () => {
       const current = newPostsArray[index].currentReaction;
       setNewPostsArray((prevArray: any) => {
         const newArray = [...prevArray];
-        newArray[index].currentReaction = current !== value ? value : "";
+        newArray[index] = {
+          ...newArray[index],
+          currentReaction: current !== value ? value : "",
+        };
+        console.log(newArray[index]);
         return newArray;
       });
 
@@ -99,12 +121,22 @@ const HomePosts = () => {
   };
 
   /* Add Comment */
-  const addComment = (commentsArray: any) => {
+  const addComment = (index: number) => {
     if (userComment) {
-      commentsArray.push({
-        comment: userComment,
-        img: profilePicture,
-        title: "Mozaffar Mohammad",
+      setNewPostsArray((prevPostsArray: any) => {
+        const updatedPostsArray = [...prevPostsArray];
+        updatedPostsArray[index] = {
+          ...updatedPostsArray[index],
+          comments: [
+            ...updatedPostsArray[index].comments,
+            {
+              comment: userComment,
+              img: profilePicture,
+              title: "Mozaffar Mohammad",
+            },
+          ],
+        };
+        return updatedPostsArray;
       });
       setUserComment("");
     }
@@ -114,7 +146,7 @@ const HomePosts = () => {
   React.useEffect(() => {
     const handleEnterPress = (event: any) => {
       if (event.keyCode === 13) {
-        addComment(newPostsArray[postIndex].comments);
+        addComment(postIndex);
       }
     };
     document.addEventListener("keydown", handleEnterPress);
@@ -132,7 +164,12 @@ const HomePosts = () => {
           <div className="profile-section-icon profile-icon w-10 h-10 hover:opacity-90">
             <img src={profilePicture} alt="profile" />
           </div>
-          <input type="text" placeholder="What's on your mind, Mozaffar?" />
+          <input
+            type="text"
+            readOnly
+            placeholder="What's on your mind, Mozaffar?"
+            onClick={handleCreatePost}
+          />
         </div>
         <div className="splitter-line mt-0 w-11/12"></div>
         <div className="create-post-second">
@@ -177,15 +214,31 @@ const HomePosts = () => {
               </div>
 
               {/* Content */}
-              <div className={`post-text p-5 ${isScreen555 && "text-sm"}`}>
-                {post.text}
+              <div
+                className={`post-text p-5 ${isScreen555 && "text-sm"} ${
+                  post.bgColor && "flexCenter text-slate-200 h-80 text-4xl"
+                }`}
+                style={{ backgroundImage: post.bgColor ? post.bgColor : "" }}
+              >
+                <h1>{post.text}</h1>
               </div>
 
               {/* Media */}
-              <div className="post-media w-100 flex ">
-                {post.mediaImage && <img src={post.mediaImage} alt="" />}
-                {post.mediaVideo && <video src={post.mediaVideo} controls />}
-              </div>
+              {(post.mediaImage || post.mediaImageURL || post.mediaVideo) && (
+                <div className="post-media w-100 flex ">
+                  {post.mediaImage && (
+                    <img src={post.mediaImage} alt="" loading="lazy" />
+                  )}
+                  {post.mediaImageURL && (
+                    <img
+                      src={URL.createObjectURL(post.mediaImageURL)}
+                      alt=""
+                      loading="lazy"
+                    />
+                  )}
+                  {post.mediaVideo && <video src={post.mediaVideo} controls />}
+                </div>
+              )}
 
               {/* Reactions */}
               <div className="reactions w-full p-4 text-gray-500 font-bold">
@@ -214,23 +267,36 @@ const HomePosts = () => {
                       <img src={ReactionsIconsArray[0].Angry} />
                     )}
 
-                    <p className="ml-1">
-                      {newPostsArray[index].currentReaction
-                        ? post.reactions.num + 1
-                        : post.reactions.num}
-                    </p>
+                    {post.reactions.num !== 0 && (
+                      <p className="ml-1">
+                        {newPostsArray[index].currentReaction
+                          ? post.reactions.num + 1
+                          : post.reactions.num}
+                      </p>
+                    )}
+
+                    {post.reactionNewPost && post.currentReaction && (
+                      <div className="flexCenter gap-2 text-sm">
+                        <img src={ReactionsIconsArray[0][post.currentReaction]} />
+                        <p>you</p>
+                      </div>
+                    )}
                   </div>
                   <div className="flex items-center">
-                    <p>{post.commentsNum}</p>
-                    <i
-                      className="reactions-icon"
-                      style={{ backgroundPosition: "0px -1384px" }}
-                    ></i>
-                    <p>{post.shareNum}</p>
-                    <i
-                      className="reactions-icon"
-                      style={{ backgroundPosition: "0px -1401px" }}
-                    ></i>
+                    {post.commentsNum && <p>{post.commentsNum}</p>}
+                    {post.commentsNum && (
+                      <i
+                        className="reactions-icon"
+                        style={{ backgroundPosition: "0px -1384px" }}
+                      ></i>
+                    )}
+                    {post.shareNum && <p>{post.shareNum}</p>}
+                    {post.shareNum && (
+                      <i
+                        className="reactions-icon"
+                        style={{ backgroundPosition: "0px -1401px" }}
+                      ></i>
+                    )}
                   </div>
                 </div>
                 <div className="splitter-line"></div>
@@ -291,7 +357,7 @@ const HomePosts = () => {
                       className="reactions-icon"
                       style={{ backgroundPosition: "0 -550px" }}
                     ></i>
-                    <p>Comment</p>
+                    <p>Comments</p>
                   </div>
                   <div className="reactions-button w-1/3">
                     <i
@@ -304,7 +370,6 @@ const HomePosts = () => {
                 <div className="splitter-line mt-1"></div>
 
                 {/* Comments */}
-
                 {post.comments &&
                   post.comments.map((item: any, index: number) => {
                     return (
@@ -395,11 +460,11 @@ const HomePosts = () => {
 
                   <div className="comments-input-icons">
                     <i
-                      className="reactions-icon"
+                      className={`reactions-icon ${isScreen555 && "hidden"}`}
                       style={{ backgroundPosition: "0px -1078px" }}
                     ></i>
                     <i
-                      className="reactions-icon"
+                      className={`reactions-icon ${isScreen555 && "hidden"}`}
                       style={{ backgroundPosition: "0px -1180px" }}
                     ></i>
                     <i
@@ -417,7 +482,7 @@ const HomePosts = () => {
                     <i
                       className="reactions-icon-send"
                       style={{ backgroundPosition: "0px -1318px" }}
-                      onClick={() => addComment(post.comments)}
+                      onClick={() => addComment(index)}
                     ></i>
                   </div>
                 </div>
