@@ -277,7 +277,9 @@ const HomePosts = ({ setShowBrightness }: any) => {
 
                     {post.reactionNewPost && post.currentReaction && (
                       <div className="flexCenter gap-2 text-sm">
-                        <img src={ReactionsIconsArray[0][post.currentReaction]} />
+                        <img
+                          src={ReactionsIconsArray[0][post["currentReaction"]]}
+                        />
                         <p>you</p>
                       </div>
                     )}
@@ -304,14 +306,17 @@ const HomePosts = ({ setShowBrightness }: any) => {
                 <div className="reactions-buttons h-fit mt-1 relative">
                   <div
                     className="reactions-button like-button w-1/3"
-                    onMouseEnter={() => setShowAnimations(true)}
+                    onMouseEnter={() => {
+                      setShowAnimations(true);
+                      setPostIndex(index);
+                    }}
                     onMouseLeave={() =>
                       setTimeout(() => {
                         setShowAnimations(false);
                       }, 300)
                     }
                   >
-                    {showAnimations && (
+                    {showAnimations && index === postIndex && (
                       <div
                         className="animations"
                         style={{ left: `${isScreen555 && "15px"}` }}
