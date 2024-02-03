@@ -10,13 +10,15 @@ import { addNewPost } from "../../../../Slices/createNewPost";
 
 const CreatePost = ({ setShowBrightness }: any) => {
   const dispatch = useDispatch();
+  const addPhotoRef: any = React.useRef(null);
   const [showColors, setShowColors] = React.useState(false);
   const [postButtonActive, setPostButtonActive] = React.useState(false);
   const [showAddPhoto, setShowAddPhoto] = React.useState(false);
   const [addPhotoNotAllowed, setAddPhotoNotAllowed] = React.useState(false);
   const [bgColor, setBgColor] = React.useState("");
   const [bgColorBorder, setBgColorBorder] = React.useState(0);
-  const [photoValue, setPhotoValue]: any = React.useState(null);
+  const [dragging, setDragging] = React.useState(false);
+  const [photoFile, setPhotoFile]: any = React.useState(null);
   const [isPhotoUploaded, setIsPhotoUploaded] = React.useState(false);
   const [textareaValue, setTextareaValue] = React.useState("");
 
@@ -28,8 +30,7 @@ const CreatePost = ({ setShowBrightness }: any) => {
   /* Handle add new photo */
   const handleUploadNewPhoto = (event: any) => {
     if (event.target.files && event.target.files[0]) {
-      setPhotoValue(event.target.files[0]);
-      event.target.value = "";
+      setPhotoFile(event.target.files[0]);
       setIsPhotoUploaded(true);
       setPostButtonActive(true);
     }
@@ -39,7 +40,7 @@ const CreatePost = ({ setShowBrightness }: any) => {
   const handleCloseAddPhoto = () => {
     setShowAddPhoto(false);
     setIsPhotoUploaded(false);
-    setPhotoValue("");
+    setPhotoFile(null);
     !textareaValue && setPostButtonActive(false);
   };
 
@@ -61,14 +62,14 @@ const CreatePost = ({ setShowBrightness }: any) => {
           date: "just now",
           title: "Mozaffar Mohammad",
           text: textareaValue,
-          mediaImageURL: photoValue,
+          mediaImageURL: photoFile,
           reactions: {
             num: 0,
           },
           comments: [],
           currentReaction: "",
           bgColor: bgColor,
-          reactionNewPost : true,
+          reactionNewPost: true,
         })
       );
       handleClose();
@@ -85,6 +86,32 @@ const CreatePost = ({ setShowBrightness }: any) => {
       setBgColor(bgColorValue);
     }
   };
+
+  /* Handle Drag Enter and Drag Over */
+  const handleDragEnterAndOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setDragging(true);
+  };
+
+  /* Handle Drop */
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setDragging(false);
+
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      setPhotoFile(file);
+      setIsPhotoUploaded(true);
+      setPostButtonActive(true);
+    }
+  };
+
+  /* Scroll when show add photo */
+  React.useEffect(() => {
+    if (addPhotoRef.current) {
+      addPhotoRef.current.scrollTo(0, 120);
+    }
+  }, [showAddPhoto]);
 
   return (
     <div className="create-new-post">
@@ -118,6 +145,7 @@ const CreatePost = ({ setShowBrightness }: any) => {
       <div
         className={`whats-on-your-mind ${bgColor && "flexCenter"}`}
         style={{ backgroundImage: bgColor }}
+        ref={addPhotoRef}
       >
         <textarea
           className={`${bgColor && "text-center text-slate-50"}`}
@@ -125,7 +153,13 @@ const CreatePost = ({ setShowBrightness }: any) => {
           onChange={(event: any) => handleTextArea(event)}
         />
         {showAddPhoto && (
-          <div className="add-photo-container">
+          <div
+            className="add-photo-container"
+            onDragOver={handleDragEnterAndOver}
+            onDragEnter={handleDragEnterAndOver}
+            onDragLeave={() => setDragging(false)}
+            onDrop={handleDrop}
+          >
             <input
               type="file"
               id="upload-new-photo"
@@ -135,8 +169,11 @@ const CreatePost = ({ setShowBrightness }: any) => {
             <div
               className="add-photo flexCenterColumn"
               style={{
+                backgroundColor: dragging
+                  ? "rgb(186, 190, 243)"
+                  : "rgb(236, 232, 232)",
                 backgroundImage: `${
-                  photoValue && `url(${URL.createObjectURL(photoValue)})`
+                  photoFile && `url(${URL.createObjectURL(photoFile)})`
                 }`,
               }}
             >
@@ -217,9 +254,10 @@ const CreatePost = ({ setShowBrightness }: any) => {
           <div className="images flexStart">
             <div
               className="image-cover flexCenter"
-              onClick={() =>
-                setShowAddPhoto(!addPhotoNotAllowed ? true : false)
-              }
+              onClick={() => {
+                setShowAddPhoto(!addPhotoNotAllowed ? true : false);
+                window.scrollTo(0, 200);
+              }}
               style={{
                 cursor: `${addPhotoNotAllowed ? "not-allowed" : "pointer"}`,
               }}
