@@ -70,14 +70,13 @@ const HomePosts = ({ setShowBrightness }: any) => {
   /* Change Reaction State */
   const handleReactionState = (index: number) => {
     return (value: string) => {
-      const current = newPostsArray[index].currentReaction;
       setNewPostsArray((prevArray: any) => {
         const newArray = [...prevArray];
         newArray[index] = {
           ...newArray[index],
-          currentReaction: current !== value ? value : "",
+          currentReaction:
+            newPostsArray[index].currentReaction !== value ? value : "",
         };
-        console.log(newArray[index]);
         return newArray;
       });
 
@@ -91,7 +90,7 @@ const HomePosts = ({ setShowBrightness }: any) => {
   const likeButton = (index: number) => {
     setNewPostsArray((prevArray: any) => {
       const newArray = [...prevArray];
-      newArray[index].currentReaction = "Like";
+      newArray[index] = { ...newArray[index], currentReaction: "Like" };
       return newArray;
     });
     setShowAnimations(false);
@@ -101,7 +100,7 @@ const HomePosts = ({ setShowBrightness }: any) => {
   const disableReaction = (index: number) => {
     setNewPostsArray((prevArray: any) => {
       const newArray = [...prevArray];
-      newArray[index].currentReaction = "";
+      newArray[index] = { ...newArray[index], currentReaction: "" };
       return newArray;
     });
     setShowAnimations(false);
