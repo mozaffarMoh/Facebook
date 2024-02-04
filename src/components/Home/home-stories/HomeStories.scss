@@ -98,8 +98,8 @@
 
 .story-content,
 .story-content-alt {
-    width: 120%;
-    height: 120%;
+    width: 170px;
+    height: 270px;
     color: white;
     transition: transform .5s ease-in-out;
 }
@@ -145,5 +145,21 @@
     .story-others {
         width: 90px;
         height: 150px;
+        .story-content{
+            width : 110px;
+            height: 170px;
+        }
+        .story-image-page{
+            width : 30px;
+            height: 30px;
+            img{
+                width : 30px;
+                height: 20px;
+                
+            }
+        }
+        .story-image-title{
+            font-size: 12px;
+        }
     }
 }

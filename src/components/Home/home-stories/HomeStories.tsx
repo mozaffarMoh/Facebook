@@ -141,7 +141,7 @@ const HomeStories = () => {
                 >
                   <div className="brightness"></div>
                   <div className="story-image-page z-20">
-                    <img src={story.img} alt="" loading="lazy" />
+                    <img src={story.img} alt=""/>
                   </div>
                   {story.storyContent ? (
                     <div>
@@ -165,7 +165,7 @@ const HomeStories = () => {
                                 position: "absolute",
                                 top: `${index + 4}0%`,
                                 left: "25%",
-                                zIndex: "100",
+                                zIndex: "10",
                               }}
                             >
                               {text.text}
