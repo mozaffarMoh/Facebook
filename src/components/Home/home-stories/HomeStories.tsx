@@ -152,13 +152,13 @@ const HomeStories = () => {
                   </div>
                   {story.storyContent ? (
                     <div>
-                      {!loadedImagesArray.includes(story.id) && (
+                      {!loadedImagesArray.includes((story.id + 1) * 10) && (
                         <div className="story-content-alt"></div>
                       )}
                       <img
                         src={story.storyContent}
                         className="story-content"
-                        onLoad={() => handleLoadedImage(story.id)}
+                        onLoad={() => handleLoadedImage((story.id + 1) * 10)}
                       />
                       {story.textArray &&
                         story.textArray.map((text: any, index: number) => {
