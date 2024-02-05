@@ -1,7 +1,7 @@
 import "./create-story.scss";
 import Header from "../../../Header/Header";
 import profilePicture from "../../../../assets/images/header/profile-picture.jpg";
-import React from "react";
+import React, { useEffect } from "react";
 import { bgColorsArray } from "./bgColorsArray";
 import { colorsArray } from "./colorsArray";
 import { Resizable } from "react-resizable";
@@ -14,6 +14,7 @@ const CreateStory = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const resizableRef: any = React.useRef(null);
+  const draggableRef: any = React.useRef(null);
   const [focused, setFocused] = React.useState(false);
   const [showUploadTextDialog, setShowUploadTextDialog] = React.useState(false);
   const [showUploadPhotoDialog, setShowUploadPhtotDialog] =
@@ -25,14 +26,13 @@ const CreateStory = () => {
   const [isTextareaHidden, setIsTextareaHidden] = React.useState(false);
   const [resizableTextArray, setResizableTextArray]: any = React.useState([]);
   const [resizableText, setResizableText] = React.useState("");
+  const [resizableTextPosition, setResizableTextPosition] = React.useState("");
   const [textareaValue, setTextAreaValue] = React.useState("");
   const [fontType, setFontType] = React.useState("");
   const [selectBG, setSelectBG] = React.useState(
     "linear-gradient(to left, rgb(146, 146, 240), rgb(126, 21, 224))"
   );
   const [textPhotoColor, setTextPhotoColor] = React.useState("");
-  const resizableRefs: React.RefObject<HTMLDivElement>[] =
-    resizableTextArray.map(() => React.createRef());
 
   /* Input Text on Focus */
   const inputTextOnFocus = () => {
@@ -145,6 +145,22 @@ const CreateStory = () => {
     navigate("/Facebook");
   };
 
+  /* Set position of draggable text */
+  useEffect(() => {
+    const handleDrag = () => {
+      const newTransform = draggableRef?.current?.style?.transform;
+      setResizableTextPosition(newTransform);
+      console.log(resizableTextPosition);
+    };
+    
+    // Add event listener for drag events
+    draggableRef.current?.addEventListener("drag", handleDrag());
+
+    return () => {
+      // Cleanup: Remove event listener
+      draggableRef.current?.removeEventListener("drag", handleDrag());
+    };
+  }, [draggableRef]);
   return (
     <>
       <Header />
@@ -264,14 +280,10 @@ const CreateStory = () => {
         </div>
 
         {/* Actions */}
-        <div
-          className={`story-actions `}
-        >
+        <div className={`story-actions `}>
           {/* Upload Text and photo */}
           {(!showUploadTextDialog || !showUploadPhotoDialog) && (
-            <div
-              className={`story-actions `}
-            >
+            <div className={`story-actions `}>
               <label htmlFor="selectImage" className="upload upload-photo">
                 <div className="icon-circle">
                   <i
@@ -332,6 +344,7 @@ const CreateStory = () => {
                               {/* Text Area on photo */}
                               <Draggable nodeRef={resizableRef}>
                                 <textarea
+                                  ref={resizableRef}
                                   placeholder="Start typing"
                                   className="textarea-on-photo"
                                   value={resizableText}
@@ -393,11 +406,7 @@ const CreateStory = () => {
                             resizableTextArray.map(
                               (item: any, index: number) => {
                                 return (
-                                  <Draggable
-                                    nodeRef={resizableRefs[index]}
-                                    key={index}
-                                    position={item.position}
-                                  >
+                                  <Draggable nodeRef={draggableRef} key={index}>
                                     <Resizable
                                       width={100}
                                       height={100}
@@ -406,7 +415,7 @@ const CreateStory = () => {
                                     >
                                       <div
                                         className="cursor-pointer"
-                                        ref={resizableRefs[index]}
+                                        ref={draggableRef}
                                       >
                                         <h1
                                           style={{
