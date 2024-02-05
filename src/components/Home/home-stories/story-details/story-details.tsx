@@ -432,7 +432,7 @@ const StoryDetails = () => {
                     </div>
                   </div>
                   <div className="media">
-                    {loaded && (
+                    {!loaded && (
                       <div
                         className="on-load-image"
                         style={{
