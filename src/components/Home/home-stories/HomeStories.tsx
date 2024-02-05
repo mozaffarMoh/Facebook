@@ -141,7 +141,14 @@ const HomeStories = () => {
                 >
                   <div className="brightness"></div>
                   <div className="story-image-page z-20">
-                    <img src={story.img} alt=""/>
+                    {!loadedImagesArray.includes(story.id) && (
+                      <div className="story-image-page-alt"></div>
+                    )}
+                    <img
+                      src={story.img}
+                      alt=""
+                      onLoad={() => handleLoadedImage(story.id)}
+                    />
                   </div>
                   {story.storyContent ? (
                     <div>
