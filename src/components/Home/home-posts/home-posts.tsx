@@ -315,7 +315,7 @@ const HomePosts = ({ setShowBrightness }: any) => {
                 </div>
               )}
               {post.mediaVideo && (
-                <video src={post.mediaVideo} controls autoPlay={false} />
+                <video src={post.mediaVideo} controls />
               )}
 
               {/* Reactions */}
