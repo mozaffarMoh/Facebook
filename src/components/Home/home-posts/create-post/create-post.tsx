@@ -46,10 +46,9 @@ const CreatePost = ({ setShowBrightness }: any) => {
 
   /* Handle Textarea */
   const handleTextArea = (event: any) => {
-    !event && !isPhotoUploaded
+    !event.target.value && !isPhotoUploaded
       ? setPostButtonActive(false)
       : setPostButtonActive(true);
-
     setTextareaValue(event.target.value);
   };
 
@@ -150,7 +149,7 @@ const CreatePost = ({ setShowBrightness }: any) => {
         <textarea
           className={`${bgColor && "text-center text-slate-50"}`}
           placeholder="What's on your mind, Mozaffar ?"
-          onChange={(event: any) => handleTextArea(event)}
+          onChange={handleTextArea}
         />
         {showAddPhoto && (
           <div
@@ -172,11 +171,9 @@ const CreatePost = ({ setShowBrightness }: any) => {
                 backgroundColor: dragging
                   ? "rgb(186, 190, 243)"
                   : "rgb(236, 232, 232)",
-                backgroundImage: `${
-                  photoFile && `url(${URL.createObjectURL(photoFile)})`
-                }`,
               }}
             >
+              {photoFile && <img className="photo-file-from-pc" src={URL.createObjectURL(photoFile)} />}
               <div
                 className="close-circle flexCenter"
                 onClick={handleCloseAddPhoto}
