@@ -173,7 +173,12 @@ const CreatePost = ({ setShowBrightness }: any) => {
                   : "rgb(236, 232, 232)",
               }}
             >
-              {photoFile && <img className="photo-file-from-pc" src={URL.createObjectURL(photoFile)} />}
+              {photoFile && (
+                <img
+                  className="photo-file-from-pc"
+                  src={URL.createObjectURL(photoFile)}
+                />
+              )}
               <div
                 className="close-circle flexCenter"
                 onClick={handleCloseAddPhoto}
