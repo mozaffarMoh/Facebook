@@ -65,7 +65,6 @@ const Animations = ({
     if (FlyAnimations) {
       setStartFly(true);
       setFlyIndex(index);
-      console.log("fly is start");
     }
   };
 

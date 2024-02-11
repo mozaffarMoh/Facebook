@@ -19,15 +19,18 @@ const HeaderNavigations = () => {
       (location.pathname === "/Facebook/" ||
         location.pathname === "/Facebook") &&
         dispatch(setActive("home"));
-      location.pathname === "/Facebook/videos/" &&
+      (location.pathname === "/Facebook/videos/" ||
+        location.pathname === "/Facebook/videos") &&
         dispatch(setActive("videos"));
-      location.pathname === "/Facebook/groups/" &&
+      (location.pathname === "/Facebook/groups/" ||
+        location.pathname === "/Facebook/groups") &&
         dispatch(setActive("groups"));
-      location.pathname === "/Facebook/gaming/" &&
+      (location.pathname === "/Facebook/gaming/" ||
+        location.pathname === "/Facebook/gaming") &&
         dispatch(setActive("gaming"));
     };
     changeActive();
-  }, [active]);
+  }, [location.pathname]);
 
   return !isScreen800 ? (
     <div className="flex w-1/3 z-10">
