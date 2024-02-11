@@ -6,13 +6,19 @@ import haha from "../../assets/images/animartions-imoges/haha.gif";
 import wow from "../../assets/images/animartions-imoges/wow.gif";
 import sad from "../../assets/images/animartions-imoges/sad.gif";
 import angry from "../../assets/images/animartions-imoges/angry.gif";
+import React from "react";
 
 interface AnimationType {
   reaction: (value: string) => void;
   positionInPosts?: boolean;
+  FlyAnimations?: boolean;
 }
 
-const Animations = ({ reaction, positionInPosts }: AnimationType) => {
+const Animations = ({
+  reaction,
+  positionInPosts,
+  FlyAnimations,
+}: AnimationType) => {
   const animationsArray = [
     {
       title: "Like",
@@ -46,10 +52,29 @@ const Animations = ({ reaction, positionInPosts }: AnimationType) => {
     },
   ];
 
+  const [startFly, setStartFly] = React.useState(false);
+  const [flyIndex, setFlyIndex] = React.useState(0);
+
   /* Send Reaction to Parent */
   const handleReaction = (value: string) => {
     reaction(value);
   };
+
+  /* Start Fly */
+  const handleFly = (index: number) => {
+    if (FlyAnimations) {
+      setStartFly(true);
+      setFlyIndex(index);
+      console.log("fly is start");
+    }
+  };
+
+  /* Stop Fly */
+  React.useEffect(() => {
+    setTimeout(() => {
+      setStartFly(false);
+    }, 700);
+  }, [startFly]);
 
   return (
     <div className={`animations ${positionInPosts && "positionInPosts"}`}>
@@ -65,7 +90,16 @@ const Animations = ({ reaction, positionInPosts }: AnimationType) => {
               src={item.src}
               loading="lazy"
               className={`${item.title === "Care" && "care-item px-2"}`}
-            ></img>
+              onClick={() => handleFly(index)}
+            />
+            {FlyAnimations && startFly && index === flyIndex && (
+              <img
+                src={item.src}
+                className={`${
+                  item.title === "Care" && "care-item px-2"
+                } fly-animation`}
+              />
+            )}
           </div>
         );
       })}

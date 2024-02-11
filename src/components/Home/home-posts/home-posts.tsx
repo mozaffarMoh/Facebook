@@ -393,10 +393,12 @@ const HomePosts = ({ setShowBrightness }: any) => {
                     }
                   >
                     {showAnimations && index === postIndex && (
-                      <Animations
-                        reaction={handleReactionState(index)}
-                        positionInPosts={true}
-                      />
+                      <div className="animations-container">
+                        <Animations
+                          reaction={handleReactionState(index)}
+                          positionInPosts={true}
+                        />
+                      </div>
                     )}
 
                     {post.currentReaction === "" ? (

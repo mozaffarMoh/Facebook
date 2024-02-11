@@ -262,6 +262,13 @@
 }
 
 
+.animations-container {
+    width: 100%;
+    position: absolute;
+    bottom: 8px;
+    left: -0px;
+}
+
 
 
 /* Responsive */
@@ -274,4 +281,5 @@
             font-size: 12px;
         }
     }
+
 }

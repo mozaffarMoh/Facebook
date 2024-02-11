@@ -16,11 +16,15 @@ const HeaderNavigations = () => {
   /* change active value for show blue underline */
   useEffect(() => {
     const changeActive = () => {
-      (location.pathname === "/Facebook/" || location.pathname === "/") &&
+      (location.pathname === "/Facebook/" ||
+        location.pathname === "/Facebook") &&
         dispatch(setActive("home"));
-      location.pathname === "/Facebook/videos/" && dispatch(setActive("videos"));
-      location.pathname === "/Facebook/groups/" && dispatch(setActive("groups"));
-      location.pathname === "/Facebook/gaming/" && dispatch(setActive("gaming"));
+      location.pathname === "/Facebook/videos/" &&
+        dispatch(setActive("videos"));
+      location.pathname === "/Facebook/groups/" &&
+        dispatch(setActive("groups"));
+      location.pathname === "/Facebook/gaming/" &&
+        dispatch(setActive("gaming"));
     };
     changeActive();
   }, [active]);
