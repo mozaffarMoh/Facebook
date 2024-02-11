@@ -275,25 +275,26 @@
             .photo-area-all {
                 width: 250px;
                 height: 85%;
-            }
 
-            .photo-area {
-                width: 100%;
-                height: 100%;
-                position: relative;
-                bottom: 15px;
-                border: 1px solid white;
-                border-radius: 10px;
-
-                img {
+                .photo-area {
                     width: 100%;
-                    overflow: hidden;
-                }
+                    height: 100%;
+                    position: relative;
+                    bottom: 15px;
+                    border: 1px solid white;
+                    border-radius: 10px;
 
-                h1 {
-                    position: absolute;
-                    top: 45%;
-                    left: 35%;
+                    img {
+                        width: 100%;
+                        height: 400px;
+                        overflow: hidden;
+                    }
+
+                    h1 {
+                        position: absolute;
+                        top: 45%;
+                        left: 35%;
+                    }
                 }
             }
 
@@ -443,18 +444,20 @@
 
 
 @media (max-width : 1000px) {
-    .create-story-page{
+    .create-story-page {
         flex-direction: column;
         height: 100%;
-        .story-text{
-            width : 100%;
+
+        .story-text {
+            width: 100%;
             height: 100%;
-            order : 2
+            order: 2
         }
-        .story-actions{
-            width : 100%;
+
+        .story-actions {
+            width: 100%;
             height: 600px;
         }
     }
-    
+
 }

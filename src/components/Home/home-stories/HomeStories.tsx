@@ -135,7 +135,7 @@ const HomeStories = () => {
                 nodeRef={ref}
               >
                 <div
-                  className="story-others flex flex-col items-center overflow-hidden"
+                  className="story-others flex flex-col items-center overflow-hidden text-slate-50"
                   ref={ref}
                   onClick={() => handleNewStoryWindow(story)}
                 >

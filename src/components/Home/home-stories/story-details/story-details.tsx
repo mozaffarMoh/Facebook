@@ -587,7 +587,9 @@ const StoryDetails = () => {
             </svg>
           </div>
           <div className="footer-animations">
-            <Animations reaction={handleReactionState} />
+            <Animations
+              reaction={handleReactionState}
+            />
           </div>
         </div>
       </div>

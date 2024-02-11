@@ -314,9 +314,7 @@ const HomePosts = ({ setShowBrightness }: any) => {
                   )}
                 </div>
               )}
-              {post.mediaVideo && (
-                <video src={post.mediaVideo} controls />
-              )}
+              {post.mediaVideo && <video src={post.mediaVideo} controls />}
 
               {/* Reactions */}
               <div className="reactions w-full p-4 text-gray-500 font-bold">
@@ -395,12 +393,10 @@ const HomePosts = ({ setShowBrightness }: any) => {
                     }
                   >
                     {showAnimations && index === postIndex && (
-                      <div
-                        className="animations"
-                        style={{ left: `${isScreen555 && "15px"}` }}
-                      >
-                        <Animations reaction={handleReactionState(index)} />
-                      </div>
+                      <Animations
+                        reaction={handleReactionState(index)}
+                        positionInPosts={true}
+                      />
                     )}
 
                     {post.currentReaction === "" ? (

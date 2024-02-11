@@ -80,6 +80,7 @@ const CreateStory = () => {
     let newText = resizableText;
     let newColor = textPhotoColor;
     let newFont = fontType;
+
     const newObject = {
       text: newText,
       color: newColor,
@@ -152,7 +153,7 @@ const CreateStory = () => {
       setResizableTextPosition(newTransform);
       console.log(resizableTextPosition);
     };
-    
+
     // Add event listener for drag events
     draggableRef.current?.addEventListener("drag", handleDrag());
 
@@ -160,7 +161,8 @@ const CreateStory = () => {
       // Cleanup: Remove event listener
       draggableRef.current?.removeEventListener("drag", handleDrag());
     };
-  }, [draggableRef]);
+  }, [draggableRef?.current?.style?.transform]);
+
   return (
     <>
       <Header />

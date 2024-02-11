@@ -8,7 +8,6 @@
 .animations {
     div {
         cursor: pointer;
-
         p {
             position: absolute;
             bottom: 60px;
@@ -32,6 +31,7 @@
             width: 57px;
             height: 38px;
         }
+
         .care-item:hover {
             width: 67px;
             height: 48px;
@@ -44,5 +44,25 @@
             color: white;
             transition: all .5s ease-in-out;
         }
+    }
+}
+
+.positionInPosts {
+    position: absolute;
+    background-color: white;
+    border-radius: 50px;
+    border: 1px solid rgb(214, 209, 209);
+    width: 400px;
+    height: 50px;
+    bottom: 40px !important;
+    left: -10px !important;
+    transition-delay: 1s;
+    transition: all .5s ease-in-out;
+}
+
+
+@media (max-width : 450px) {
+    .positionInPosts {
+        width: 100%;
     }
 }

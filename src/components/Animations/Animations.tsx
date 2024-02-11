@@ -7,7 +7,12 @@ import wow from "../../assets/images/animartions-imoges/wow.gif";
 import sad from "../../assets/images/animartions-imoges/sad.gif";
 import angry from "../../assets/images/animartions-imoges/angry.gif";
 
-const Animations = ({ reaction }: any) => {
+interface AnimationType {
+  reaction: (value: string) => void;
+  positionInPosts?: boolean;
+}
+
+const Animations = ({ reaction, positionInPosts }: AnimationType) => {
   const animationsArray = [
     {
       title: "Like",
@@ -47,7 +52,7 @@ const Animations = ({ reaction }: any) => {
   };
 
   return (
-    <div className="animations">
+    <div className={`animations ${positionInPosts && "positionInPosts"}`}>
       {animationsArray.map((item, index) => {
         return (
           <div

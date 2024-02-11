@@ -194,13 +194,7 @@
     cursor: pointer;
 }
 
-.reactions-buttons .animations {
-    position: absolute;
-    bottom: 25px;
-    left: -35px;
-    transition-delay: 1s;
-    transition: all .5s ease-in-out;
-}
+
 
 .like-button:hover .animations {
     bottom: 30px;
