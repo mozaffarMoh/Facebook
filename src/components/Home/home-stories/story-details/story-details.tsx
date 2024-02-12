@@ -132,9 +132,9 @@ const StoryDetails = () => {
                 <XLg />
               </div>
             </ToolTip>
-            <a href="https://www.facebook.com">
+            <Link to="/Facebook/">
               <Facebook color="rgb(0,70,255)" size={40} cursor={"pointer"} />
-            </a>
+            </Link>
           </div>
           <div className="splitter-line"></div>
           <div className="p-3">
@@ -218,9 +218,9 @@ const StoryDetails = () => {
               <XLg />
             </div>
           </ToolTip>
-          <a href="https://www.facebook.com">
+          <Link to="/Facebook/">
             <Facebook color="rgb(0,70,255)" size={40} cursor={"pointer"} />
-          </a>
+          </Link>
         </div>
       )}
 
@@ -494,11 +494,11 @@ const StoryDetails = () => {
                             style={{
                               fontFamily: text.fontType,
                               color: text.color,
+                              fontSize: text.fontSize,
                               position: "absolute",
                               top: `${index + 3}5%`,
                               left: "35%",
                               zIndex: "100",
-                              fontSize: "30px",
                             }}
                           >
                             {text.text}

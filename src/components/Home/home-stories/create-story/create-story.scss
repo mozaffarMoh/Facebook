@@ -316,6 +316,32 @@
                 left: 0px;
                 text-align: center;
             }
+
+            .resizable-textArray-element {
+
+                .resizable-delete-circle {
+                    display: none;
+                    position: absolute;
+                    top: -7px;
+                    left: -7px;
+                    background-color: white;
+                    border-radius: 50%;
+                    z-index: 20000000 !important;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: rgb(243, 229, 229);
+                    }
+                }
+
+                &:hover {
+                    border: 1px solid white;
+
+                    .resizable-delete-circle {
+                        display: block;
+                    }
+                }
+            }
         }
 
         .custom-photo-value {

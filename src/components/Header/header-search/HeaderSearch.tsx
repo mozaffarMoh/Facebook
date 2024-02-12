@@ -4,6 +4,7 @@ import { Facebook, Search, ArrowLeft } from "react-bootstrap-icons";
 import { MediaQuery } from "../../MediaQuery";
 import SearchDialog from "../../SearchDialog/SearchDialog";
 import { CSSTransition } from "react-transition-group";
+import { Link } from "react-router-dom";
 
 const HeaderSearch = () => {
   const [showSearchDialog, setShowSearchDialog] = React.useState(false);
@@ -16,11 +17,11 @@ const HeaderSearch = () => {
         !isScreen800 ? "w-1/3" : isScreen555 ? "w-1/4" : "w-1/2"
       } flex z-30`}
     >
-      <a href="https://www.facebook.com">
+      <Link to="/Facebook/">
         {!showSearchDialog && (
           <Facebook color="rgb(0,70,255)" size={40} cursor={"pointer"} />
         )}
-      </a>
+      </Link>
       {showSearchDialog || !isScreen555 ? (
         <div className="flex search justify-start">
           <div className="search-icon flex">
@@ -52,7 +53,7 @@ const HeaderSearch = () => {
           <Search onClick={() => setShowSearchDialog(true)} />
         </div>
       )}
-      
+
       {/* Search Dialog */}
       <CSSTransition
         in={showSearchDialog}

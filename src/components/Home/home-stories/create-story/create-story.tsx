@@ -1,20 +1,21 @@
 import "./create-story.scss";
 import Header from "../../../Header/Header";
 import profilePicture from "../../../../assets/images/header/profile-picture.jpg";
-import React, { useEffect } from "react";
+import React from "react";
 import { bgColorsArray } from "./bgColorsArray";
 import { colorsArray } from "./colorsArray";
-import { Resizable } from "react-resizable";
 import Draggable from "react-draggable";
 import { useDispatch } from "react-redux";
 import { addNewStory } from "../../../../Slices/createNewStory";
 import { useNavigate } from "react-router-dom";
+import { Rnd } from "react-rnd";
+import { X } from "react-bootstrap-icons";
 
 const CreateStory = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const resizableRef: any = React.useRef(null);
-  const draggableRef: any = React.useRef(null);
+  const resizableTextRef: any = React.useRef(null);
   const [focused, setFocused] = React.useState(false);
   const [showUploadTextDialog, setShowUploadTextDialog] = React.useState(false);
   const [showUploadPhotoDialog, setShowUploadPhtotDialog] =
@@ -26,9 +27,10 @@ const CreateStory = () => {
   const [isTextareaHidden, setIsTextareaHidden] = React.useState(false);
   const [resizableTextArray, setResizableTextArray]: any = React.useState([]);
   const [resizableText, setResizableText] = React.useState("");
-  const [resizableTextPosition, setResizableTextPosition] = React.useState("");
   const [textareaValue, setTextAreaValue] = React.useState("");
   const [fontType, setFontType] = React.useState("");
+  const [fontSizeValue, setFontSizeValue] = React.useState(19.6);
+  const [fontSizeIndex, setFontSizeIndex] = React.useState(0);
   const [selectBG, setSelectBG] = React.useState(
     "linear-gradient(to left, rgb(146, 146, 240), rgb(126, 21, 224))"
   );
@@ -79,13 +81,16 @@ const CreateStory = () => {
   React.useEffect(() => {
     let newText = resizableText;
     let newColor = textPhotoColor;
-    let newFont = fontType;
+    let newFontType = fontType;
+    let newFontSize = 19.6;
 
     const newObject = {
       text: newText,
       color: newColor,
-      fontType: newFont,
+      fontType: newFontType,
+      fontSize: newFontSize,
     };
+
     const handleClickOutside = (event: any) => {
       if (
         resizableRef.current &&
@@ -107,6 +112,40 @@ const CreateStory = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [fontType, textPhotoColor, resizableText]);
+
+  /* Change fontSize for resizable text */
+  const handleChangeFontSize = (index: number) => {
+    const width = resizableTextRef.current?.resizable?.resizable?.clientWidth;
+
+    if (width >= 98 && width <= 250) {
+      const FontSizeInPercent = (width * 20) / 100;
+      setFontSizeValue(FontSizeInPercent);
+    }
+
+    setFontSizeIndex(index);
+  };
+
+  /* Set New Font Size for resizableTextArray */
+  React.useEffect(() => {
+    if (fontSizeValue !== 19.6) {
+      setResizableTextArray((prevArray: any) => {
+        const newArray = [...prevArray];
+        newArray[fontSizeIndex] = {
+          ...newArray[fontSizeIndex],
+          fontSize: fontSizeValue,
+        };
+        return newArray;
+      });
+    }
+  }, [fontSizeValue]);
+
+  const removeItemFromResizableTextArray = (index: number) => {
+    setResizableTextArray((prevArray: any) => {
+      const newArray = [...prevArray];
+      newArray.splice(index, 1);
+      return newArray;
+    });
+  };
 
   /* Share Text Story */
   const shareTaxtStory = () => {
@@ -145,23 +184,6 @@ const CreateStory = () => {
     discardChanges();
     navigate("/Facebook");
   };
-
-  /* Set position of draggable text */
-  useEffect(() => {
-    const handleDrag = () => {
-      const newTransform = draggableRef?.current?.style?.transform;
-      setResizableTextPosition(newTransform);
-      console.log(resizableTextPosition);
-    };
-
-    // Add event listener for drag events
-    draggableRef.current?.addEventListener("drag", handleDrag());
-
-    return () => {
-      // Cleanup: Remove event listener
-      draggableRef.current?.removeEventListener("drag", handleDrag());
-    };
-  }, [draggableRef?.current?.style?.transform]);
 
   return (
     <>
@@ -408,28 +430,44 @@ const CreateStory = () => {
                             resizableTextArray.map(
                               (item: any, index: number) => {
                                 return (
-                                  <Draggable nodeRef={draggableRef} key={index}>
-                                    <Resizable
-                                      width={100}
-                                      height={100}
-                                      minConstraints={[50, 50]}
-                                      maxConstraints={[500, 500]}
+                                  <Rnd
+                                    minWidth={50}
+                                    maxWidth={250}
+                                    minHeight={25}
+                                    maxHeight={100}
+                                    onResize={() => handleChangeFontSize(index)}
+                                    key={index}
+                                    ref={resizableTextRef}
+                                    className="resizable-textArray-element"
+                                  >
+                                    <div className="resizable-delete-circle flexCenter">
+                                      <X
+                                        onClick={() =>
+                                          removeItemFromResizableTextArray(
+                                            index
+                                          )
+                                        }
+                                      />
+                                    </div>
+                                    <div
+                                      style={{
+                                        width: "100%",
+                                        height: "100%",
+                                        whiteSpace: "nowrap",
+                                      }}
+                                      className="flexCenter"
                                     >
-                                      <div
-                                        className="cursor-pointer"
-                                        ref={draggableRef}
+                                      <p
+                                        style={{
+                                          color: `${item.color || "white"}`,
+                                          fontFamily: `${item.fontType}`,
+                                          fontSize: `${item.fontSize}px`,
+                                        }}
                                       >
-                                        <h1
-                                          style={{
-                                            color: `${item.color}`,
-                                            fontFamily: `${item.fontType}`,
-                                          }}
-                                        >
-                                          {item.text}
-                                        </h1>
-                                      </div>
-                                    </Resizable>
-                                  </Draggable>
+                                        {item.text}
+                                      </p>
+                                    </div>
+                                  </Rnd>
                                 );
                               }
                             )}
