@@ -15,7 +15,7 @@ const CreateStory = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const resizableRef: any = React.useRef(null);
-  const resizableTextRef: any = React.useRef(null);
+  const resizableTextRefs: any = React.useRef([]);
   const [focused, setFocused] = React.useState(false);
   const [showUploadTextDialog, setShowUploadTextDialog] = React.useState(false);
   const [showUploadPhotoDialog, setShowUploadPhtotDialog] =
@@ -30,7 +30,8 @@ const CreateStory = () => {
   const [textareaValue, setTextAreaValue] = React.useState("");
   const [fontType, setFontType] = React.useState("");
   const [fontSizeValue, setFontSizeValue] = React.useState(19.6);
-  const [fontSizeIndex, setFontSizeIndex] = React.useState(0);
+  const [positionValue, setPositionValue] = React.useState({ x: 0, y: 0 });
+  const [resizableIndex, setResizableIndex] = React.useState(0);
   const [selectBG, setSelectBG] = React.useState(
     "linear-gradient(to left, rgb(146, 146, 240), rgb(126, 21, 224))"
   );
@@ -83,12 +84,14 @@ const CreateStory = () => {
     let newColor = textPhotoColor;
     let newFontType = fontType;
     let newFontSize = 19.6;
+    let newPosition = positionValue;
 
     const newObject = {
       text: newText,
       color: newColor,
       fontType: newFontType,
       fontSize: newFontSize,
+      position: newPosition,
     };
 
     const handleClickOutside = (event: any) => {
@@ -115,14 +118,14 @@ const CreateStory = () => {
 
   /* Change fontSize for resizable text */
   const handleChangeFontSize = (index: number) => {
-    const width = resizableTextRef.current?.resizable?.resizable?.clientWidth;
+    const width = resizableTextRefs.current?.resizable?.resizable?.clientWidth;
 
     if (width >= 98 && width <= 250) {
       const FontSizeInPercent = (width * 20) / 100;
       setFontSizeValue(FontSizeInPercent);
     }
 
-    setFontSizeIndex(index);
+    setResizableIndex(index);
   };
 
   /* Set New Font Size for resizableTextArray */
@@ -130,8 +133,8 @@ const CreateStory = () => {
     if (fontSizeValue !== 19.6) {
       setResizableTextArray((prevArray: any) => {
         const newArray = [...prevArray];
-        newArray[fontSizeIndex] = {
-          ...newArray[fontSizeIndex],
+        newArray[resizableIndex] = {
+          ...newArray[resizableIndex],
           fontSize: fontSizeValue,
         };
         return newArray;
@@ -139,6 +142,7 @@ const CreateStory = () => {
     }
   }, [fontSizeValue]);
 
+  /* Remove Item from ResizableTextArray */
   const removeItemFromResizableTextArray = (index: number) => {
     setResizableTextArray((prevArray: any) => {
       const newArray = [...prevArray];
@@ -146,6 +150,29 @@ const CreateStory = () => {
       return newArray;
     });
   };
+
+  /* Change position for resizable text */
+  const handleChangePosition = (index: number) => {
+    const x = resizableTextRefs?.current[index]?.draggable?.state.x;
+    const y = resizableTextRefs?.current[index]?.draggable?.state.y;
+    setPositionValue({ x: x, y: y });
+    setResizableIndex(index);
+  };
+
+  /* Add new position to resiableTextArray */
+  React.useEffect(() => {
+    if (positionValue.x !== 0 && positionValue.y !== 0) {
+      setResizableTextArray((prevArray: any) => {
+        const newArray = [...prevArray];
+        newArray[resizableIndex] = {
+          ...newArray[resizableIndex],
+          position: positionValue,
+        };
+        return newArray;
+      });
+      setPositionValue({ x: 0, y: 0 });
+    }
+  }, [positionValue, resizableIndex]);
 
   /* Share Text Story */
   const shareTaxtStory = () => {
@@ -436,8 +463,11 @@ const CreateStory = () => {
                                     minHeight={25}
                                     maxHeight={100}
                                     onResize={() => handleChangeFontSize(index)}
+                                    onDrag={() => handleChangePosition(index)}
                                     key={index}
-                                    ref={resizableTextRef}
+                                    ref={(el) =>
+                                      (resizableTextRefs.current[index] = el)
+                                    }
                                     className="resizable-textArray-element"
                                   >
                                     <div className="resizable-delete-circle flexCenter">

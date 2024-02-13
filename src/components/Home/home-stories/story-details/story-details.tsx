@@ -496,8 +496,12 @@ const StoryDetails = () => {
                               color: text.color,
                               fontSize: text.fontSize,
                               position: "absolute",
-                              top: `${index + 3}5%`,
-                              left: "35%",
+                              top: `${
+                                text.position.y + (text.position.y * 35) / 100
+                              }px`,
+                              left: `${
+                                text.position.x + (text.position.x * 60) / 100
+                              }px`,
                               zIndex: "100",
                             }}
                           >

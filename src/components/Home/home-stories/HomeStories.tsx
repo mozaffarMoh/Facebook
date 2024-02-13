@@ -168,11 +168,15 @@ const HomeStories = () => {
                               color={text.color}
                               style={{
                                 fontFamily: text.fontType,
-                                fontSize : text.fontSize,
+                                fontSize: text.fontSize,
                                 color: text.color,
                                 position: "absolute",
-                                top: `${index + 4}0%`,
-                                left: "25%",
+                                top: `${
+                                  text.position.y - (text.position.y * 40) / 100
+                                }px`,
+                                left: `${
+                                  text.position.x - (text.position.x * 50) / 100
+                                }px`,
                                 zIndex: "10",
                               }}
                             >
