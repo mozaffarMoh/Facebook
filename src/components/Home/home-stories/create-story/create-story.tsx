@@ -118,8 +118,8 @@ const CreateStory = () => {
 
   /* Change fontSize for resizable text */
   const handleChangeFontSize = (index: number) => {
-    const width = resizableTextRefs.current?.resizable?.resizable?.clientWidth;
-
+    const width =
+      resizableTextRefs.current[index]?.resizable?.resizable?.clientWidth;
     if (width >= 98 && width <= 250) {
       const FontSizeInPercent = (width * 20) / 100;
       setFontSizeValue(FontSizeInPercent);
