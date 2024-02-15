@@ -502,7 +502,7 @@ const StoryDetails = () => {
                               left: `${
                                 text.position.x + (text.position.x * 60) / 100
                               }px`,
-                              zIndex: "100",
+                              zIndex: "90",
                             }}
                           >
                             {text.text}
