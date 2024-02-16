@@ -195,6 +195,21 @@
             background-size: auto;
             background-repeat: no-repeat;
             display: inline-block;
+
+
+        }
+
+        .emoji-icon:hover,
+        .emoji-is-active {
+            border-radius: 50%;
+            background-color: rgb(233, 231, 231);
+        }
+
+        .emojis-field {
+            position: absolute;
+            bottom: 0px;
+            width: 300px !important;
+            height: 350px !important;
         }
 
         .colors-arrow-container {

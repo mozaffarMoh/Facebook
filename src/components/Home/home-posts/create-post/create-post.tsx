@@ -7,6 +7,7 @@ import colorsImage from "../../../../assets/images/posts/colors.png";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { addNewPost } from "../../../../Slices/createNewPost";
+import EmojiPicker from "emoji-picker-react";
 
 const CreatePost = ({ setShowBrightness }: any) => {
   const dispatch = useDispatch();
@@ -20,7 +21,13 @@ const CreatePost = ({ setShowBrightness }: any) => {
   const [dragging, setDragging] = React.useState(false);
   const [photoFile, setPhotoFile]: any = React.useState(null);
   const [isPhotoUploaded, setIsPhotoUploaded] = React.useState(false);
+  const [showEmojis, setShowEmojis] = React.useState(false);
   const [textareaValue, setTextareaValue] = React.useState("");
+
+  /* Handle Add Emoji */
+  const handleEmojiSelect = (emoji: any) => {
+    setTextareaValue((prev) => prev + emoji.emoji);
+  };
 
   /* Handle Close */
   const handleClose = () => {
@@ -150,6 +157,7 @@ const CreatePost = ({ setShowBrightness }: any) => {
           className={`${bgColor && "text-center text-slate-50"}`}
           placeholder="What's on your mind, Mozaffar ?"
           onChange={handleTextArea}
+          value={textareaValue}
         />
         {showAddPhoto && (
           <div
@@ -235,7 +243,16 @@ const CreatePost = ({ setShowBrightness }: any) => {
             />
           )}
         </div>
-        <i className="emoji-icon"></i>
+        <i
+          className={`emoji-icon ${showEmojis ? 'emoji-is-active' : ''}`}
+          onClick={() => setShowEmojis(!showEmojis)}
+        ></i>
+        {showEmojis && (
+          <EmojiPicker
+            className="emojis-field"
+            onEmojiClick={(emoji: any) => handleEmojiSelect(emoji)}
+          />
+        )}
       </div>
 
       {/* Add to your post  */}
