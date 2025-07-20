@@ -8,6 +8,7 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
+    "build-preview": "npm run build && npm run preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
@@ -50,6 +51,7 @@
     "react-transition-group": "^4.4.5",
     "tailwindcss": "^3.3.6",
     "typescript": "^5.2.2",
-    "vite": "^5.0.8"
+    "vite": "^5.0.8",
+    "vite-plugin-pwa": "^1.0.1"
   }
 }
