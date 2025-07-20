@@ -54,14 +54,16 @@ function App() {
   return (
     <>
       {showInstallButton && (
-        <button
-          onClick={handleInstallClick}
-          className="reset"
-          style={{ marginBottom: "1rem" }}
-        >
-          تحميل التطبيق
-        </button>
+        <div className="flexCenter mt-2">
+          <button
+            onClick={handleInstallClick}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded mb-4 transition-colors duration-300"
+          >
+            تحميل التطبيق
+          </button>
+        </div>
       )}
+
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
