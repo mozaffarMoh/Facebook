@@ -24,10 +24,8 @@ function App() {
   const [deferredPrompt, setDeferredPrompt]: any = useState(null);
   const [showInstallButton, setShowInstallButton] = useState(false);
 
-  console.log("showInstallButton : ", showInstallButton);
   // Handle install prompt
   useEffect(() => {
-    console.log("useEffect run");
     const handler = (e: any) => {
       e.preventDefault();
       setDeferredPrompt(e);
@@ -41,7 +39,7 @@ function App() {
       window.removeEventListener("beforeinstallprompt", handler);
     };
   }, []);
-  
+
   const handleInstallClick = async () => {
     if (!deferredPrompt) return;
 
@@ -61,7 +59,7 @@ function App() {
           className="reset"
           style={{ marginBottom: "1rem" }}
         >
-          Install App
+          تحميل التطبيق
         </button>
       )}
       <Router>
